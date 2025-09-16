@@ -1,0 +1,41 @@
+{
+  "scheme": "acme",
+  "userInterfaceStyle": "automatic",
+  "orientation": "default",
+  "web": {
+    "output": "static"
+  },
+  "plugins": [
+    [
+      "expo-router",
+      {
+        "origin": "https://n"
+      }
+    ],
+    [
+      "expo-build-properties",
+      {
+        "android": {
+          "minSdkVersion": 34,
+          "compileSdkVersion": 36,
+          "targetSdkVersion": 36,
+          "buildToolsVersion": "36.0.0"
+        }
+      }
+    ]
+  ],
+  "android": {
+    "userInterfaceStyle": "automatic",
+    "buildProperties": {
+      "android.agpVersion": "8.1.1"
+    }
+  },
+  "name": "my-app",
+  "slug": "my-app",
+  "icon": "./src/assets/icon.png",
+  "splash": {
+    "image": "./src/assets/icon.png",
+    "resizeMode": "contain",
+    "backgroundColor": "#ffffff"
+  }
+}
