@@ -5,7 +5,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
 import { Header } from '../components/Header';
 import { BottomNavigation } from '../components/BottomNavigation';
-import { AnimatedCard } from '../components/AnimatedCard';
+import { Card } from '../components/Card';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function StatisticsPage() {
@@ -154,7 +154,7 @@ export default function StatisticsPage() {
         <View className="mx-4 mb-6">
           <View className="flex-row flex-wrap -mx-2">
             <View className="w-1/2 px-2 mb-4">
-              <AnimatedCard className="p-4 items-center">
+              <Card className="p-4 items-center">
                 <View className="w-12 h-12 rounded-full items-center justify-center mb-3 bg-green-100">
                   <Ionicons name="trending-up" size={24} color="#10b981" />
                 </View>
@@ -164,11 +164,11 @@ export default function StatisticsPage() {
                 <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                   Income
                 </Text>
-              </AnimatedCard>
+              </Card>
             </View>
 
             <View className="w-1/2 px-2 mb-4">
-              <AnimatedCard className="p-4 items-center">
+              <Card className="p-4 items-center">
                 <View className="w-12 h-12 rounded-full items-center justify-center mb-3 bg-red-100">
                   <Ionicons name="trending-down" size={24} color="#ef4444" />
                 </View>
@@ -178,11 +178,11 @@ export default function StatisticsPage() {
                 <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                   Expenses
                 </Text>
-              </AnimatedCard>
+              </Card>
             </View>
 
             <View className="w-1/2 px-2 mb-4">
-              <AnimatedCard className="p-4 items-center">
+              <Card className="p-4 items-center">
                 <View className={`w-12 h-12 rounded-full items-center justify-center mb-3 ${periodNet >= 0 ? 'bg-green-100' : 'bg-red-100'}`}>
                   <Ionicons name={periodNet >= 0 ? 'checkmark-circle' : 'close-circle'} size={24} color={periodNet >= 0 ? '#10b981' : '#ef4444'} />
                 </View>
@@ -192,11 +192,11 @@ export default function StatisticsPage() {
                 <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                   Net Income
                 </Text>
-              </AnimatedCard>
+              </Card>
             </View>
 
             <View className="w-1/2 px-2 mb-4">
-              <AnimatedCard className="p-4 items-center">
+              <Card className="p-4 items-center">
                 <View className="w-12 h-12 rounded-full items-center justify-center mb-3 bg-blue-100">
                   <Ionicons name="receipt" size={24} color="#3b82f6" />
                 </View>
@@ -206,13 +206,13 @@ export default function StatisticsPage() {
                 <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                   Transactions
                 </Text>
-              </AnimatedCard>
+              </Card>
             </View>
           </View>
         </View>
 
         {/* Daily Spending Pattern */}
-        <AnimatedCard className="mx-4 mb-6 p-4">
+        <Card className="mx-4 mb-6 p-4">
           <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Daily Spending (Last 7 Days)
           </Text>
@@ -251,9 +251,9 @@ export default function StatisticsPage() {
               </Text>
             ))}
           </View>
-        </AnimatedCard>
+        </Card>
         {/* Monthly Trend */}
-        <AnimatedCard className="mx-4 mb-6 p-4">
+        <Card className="mx-4 mb-6 p-4">
           <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             6-Month Trend
           </Text>
@@ -277,10 +277,10 @@ export default function StatisticsPage() {
               </View>
             ))}
           </View>
-        </AnimatedCard>
+        </Card>
 
         {/* Category Breakdown */}
-        <AnimatedCard className="mx-4 mb-6 p-4">
+        <Card className="mx-4 mb-6 p-4">
           <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Top Spending Categories
           </Text>
@@ -320,11 +320,11 @@ export default function StatisticsPage() {
               </View>
             )}
           </View>
-        </AnimatedCard>
+        </Card>
 
         {/* Quick Stats */}
         <View className="mx-4 mt-6">
-          <AnimatedCard className="p-4 flex-row items-center">
+          <Card className="p-4 flex-row items-center">
             <View className={`w-12 h-12 rounded-full items-center justify-center mr-3 ${isDark ? 'bg-blue-900' : 'bg-blue-100'}`}>
               <Ionicons name="receipt" size={20} color="#3b82f6" />
             </View>
@@ -336,9 +336,9 @@ export default function StatisticsPage() {
                 {transactions.length}
               </Text>
             </View>
-          </AnimatedCard>
+          </Card>
 
-          <AnimatedCard className="mt-3 p-4 flex-row items-center">
+          <Card className="mt-3 p-4 flex-row items-center">
             <View className={`w-12 h-12 rounded-full items-center justify-center mr-3 ${isDark ? 'bg-green-900' : 'bg-green-100'}`}>
               <Ionicons name="trending-up" size={20} color="#10b981" />
             </View>
@@ -353,9 +353,9 @@ export default function StatisticsPage() {
                 }
               </Text>
             </View>
-          </AnimatedCard>
+          </Card>
 
-          <AnimatedCard className="mt-3 p-4 flex-row items-center">
+          <Card className="mt-3 p-4 flex-row items-center">
             <View className={`w-12 h-12 rounded-full items-center justify-center mr-3 ${isDark ? 'bg-purple-900' : 'bg-purple-100'}`}>
               <Ionicons name="calendar" size={20} color="#8b5cf6" />
             </View>
@@ -373,7 +373,7 @@ export default function StatisticsPage() {
                  }).length}
               </Text>
             </View>
-          </AnimatedCard>
+          </Card>
         </View>
 
         <View className="h-20" />

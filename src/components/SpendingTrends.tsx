@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
-import { AnimatedCard } from './AnimatedCard';
+import { Card } from './Card';
 import { Ionicons } from '@expo/vector-icons';
 
 export function SpendingTrends() {
@@ -66,7 +66,7 @@ export function SpendingTrends() {
         </TouchableOpacity>
       </View>
 
-      <AnimatedCard className="p-4">
+      <Card className="p-4">
         {/* Trend Summary */}
         <View className="flex-row items-center justify-between mb-4">
           <View>
@@ -147,7 +147,7 @@ export function SpendingTrends() {
             </Text>
           </View>
         </View>
-      </AnimatedCard>
+      </Card>
     </View>
   );
 }

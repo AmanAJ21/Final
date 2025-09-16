@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, ScrollView } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
-import { AnimatedCard } from './AnimatedCard';
+import { Card } from './Card';
 import { Ionicons } from '@expo/vector-icons';
 
 interface DateRangePickerProps {

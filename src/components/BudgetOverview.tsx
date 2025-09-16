@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
-import { AnimatedCard } from './AnimatedCard';
+import { Card } from './Card';
 import { Ionicons } from '@expo/vector-icons';
 
 export function BudgetOverview() {
@@ -59,7 +59,7 @@ export function BudgetOverview() {
           const isOverBudget = spent > budget.limit;
 
           return (
-            <AnimatedCard
+            <Card
               key={budget.name}
               className="p-4"
             >
@@ -105,7 +105,7 @@ export function BudgetOverview() {
                   </Text>
                 )}
               </View>
-            </AnimatedCard>
+            </Card>
           );
         })}
       </View>

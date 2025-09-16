@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
-import { AnimatedCard } from './AnimatedCard';
+import { Card } from './Card';
 import { Ionicons } from '@expo/vector-icons';
 
 export function RecentTransactions() {
@@ -56,7 +56,7 @@ export function RecentTransactions() {
 
       <View className="space-y-3">
         {recentTransactions.map((transaction, index) => (
-          <AnimatedCard
+          <Card
             key={transaction.id}
             className="p-4"
             onPress={() => router.push(`/transaction-detail?id=${transaction.id}`)}
@@ -98,12 +98,12 @@ export function RecentTransactions() {
                 </View>
               </View>
             </View>
-          </AnimatedCard>
+          </Card>
         ))}
       </View>
 
       {recentTransactions.length === 0 && (
-        <AnimatedCard className="p-8 items-center">
+        <Card className="p-8 items-center">
           <Ionicons
             name="receipt-outline"
             size={48}
@@ -115,7 +115,7 @@ export function RecentTransactions() {
           <Text className={`text-sm text-center ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
             Add your first transaction to get started
           </Text>
-        </AnimatedCard>
+        </Card>
       )}
     </View>
   );

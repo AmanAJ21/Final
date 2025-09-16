@@ -5,7 +5,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
 import { Header } from '../components/Header';
 import { BottomNavigation } from '../components/BottomNavigation';
-import { AnimatedCard } from '../components/AnimatedCard';
+import { Card } from '../components/Card';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function CategoriesPage() {
@@ -146,7 +146,7 @@ export default function CategoriesPage() {
 
         {/* Add Category Form */}
         {showAddCategory && (
-          <AnimatedCard className="mx-4 mb-4 p-4">
+          <Card className="mx-4 mb-4 p-4">
             <Text className={`text-lg font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
               Add New {selectedType === 'income' ? 'Income' : 'Expense'} Category
             </Text>
@@ -179,7 +179,7 @@ export default function CategoriesPage() {
                 </Text>
               </TouchableOpacity>
             </View>
-          </AnimatedCard>
+          </Card>
         )}
 
         {/* Categories List */}
@@ -188,7 +188,7 @@ export default function CategoriesPage() {
             const stats = getCategoryStats(category, selectedType);
 
             return (
-              <AnimatedCard key={category} className={`p-4 ${index > 0 ? 'mt-3' : ''}`}>
+              <Card key={category} className={`p-4 ${index > 0 ? 'mt-3' : ''}`}>
                 <View className="flex-row items-center">
                   <View className={`w-12 h-12 rounded-full items-center justify-center mr-4 ${selectedType === 'income' ? 'bg-green-100' : 'bg-red-100'
                     }`}>
@@ -236,7 +236,7 @@ export default function CategoriesPage() {
                     </Text>
                   </View>
                 )}
-              </AnimatedCard>
+              </Card>
             );
           })}
         </View>

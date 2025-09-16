@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
-import { AnimatedCard } from './AnimatedCard';
+import { Card } from './Card';
 import { Ionicons } from '@expo/vector-icons';
 
 export function SpendingInsights() {
@@ -71,7 +71,7 @@ export function SpendingInsights() {
       
       <View>
         {insights.map((insight, index) => (
-          <AnimatedCard
+          <Card
             key={index}
             className={`p-4 ${index > 0 ? 'mt-3' : ''}`}
           >
@@ -96,7 +96,7 @@ export function SpendingInsights() {
               </Text>
             </View>
             </View>
-          </AnimatedCard>
+          </Card>
         ))}
       </View>
     </View>

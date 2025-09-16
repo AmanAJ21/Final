@@ -5,7 +5,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
 import { Header } from '../components/Header';
 import { BottomNavigation } from '../components/BottomNavigation';
-import { AnimatedCard } from '../components/AnimatedCard';
+import { Card } from '../components/Card';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function ExportImportPage() {
@@ -123,7 +123,7 @@ export default function ExportImportPage() {
       
       <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 20 }}>
         {/* Statistics Card */}
-        <AnimatedCard className="mx-4 mt-6 p-4">
+        <Card className="mx-4 mt-6 p-4">
           <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Data Overview
           </Text>
@@ -151,7 +151,7 @@ export default function ExportImportPage() {
               </Text>
             </View>
           </View>
-        </AnimatedCard>
+        </Card>
 
         {/* Export Section */}
         <View className="mx-4 mt-6">
@@ -161,7 +161,7 @@ export default function ExportImportPage() {
           
           <View>
             {exportOptions.map((option, index) => (
-              <AnimatedCard
+              <Card
                 key={option.id}
                 className={`p-4 ${index > 0 ? 'mt-3' : ''}`}
                 onPress={option.onPress}
@@ -186,7 +186,7 @@ export default function ExportImportPage() {
                     color={isDark ? '#6b7280' : '#9ca3af'}
                   />
                 </View>
-              </AnimatedCard>
+              </Card>
             ))}
           </View>
         </View>
@@ -199,7 +199,7 @@ export default function ExportImportPage() {
           
           <View>
             {importOptions.map((option, index) => (
-              <AnimatedCard
+              <Card
                 key={option.id}
                 className={`p-4 ${index > 0 ? 'mt-3' : ''}`}
                 onPress={option.onPress}
@@ -224,13 +224,13 @@ export default function ExportImportPage() {
                     color={isDark ? '#6b7280' : '#9ca3af'}
                   />
                 </View>
-              </AnimatedCard>
+              </Card>
             ))}
           </View>
         </View>
 
         {/* Backup Info */}
-        <AnimatedCard className="mx-4 mt-6 p-4">
+        <Card className="mx-4 mt-6 p-4">
           <View className="flex-row items-start">
             <View className={`w-10 h-10 rounded-full items-center justify-center mr-3 ${isDark ? 'bg-blue-900' : 'bg-blue-100'}`}>
               <Ionicons name="information-circle" size={20} color="#3b82f6" />
@@ -248,7 +248,7 @@ export default function ExportImportPage() {
               </Text>
             </View>
           </View>
-        </AnimatedCard>
+        </Card>
 
         <View className="h-20" />
       </ScrollView>

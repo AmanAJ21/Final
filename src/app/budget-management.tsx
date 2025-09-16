@@ -5,7 +5,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
 import { Header } from '../components/Header';
 import { BottomNavigation } from '../components/BottomNavigation';
-import { AnimatedCard } from '../components/AnimatedCard';
+import { Card } from '../components/Card';
 import { Ionicons } from '@expo/vector-icons';
 
 interface BudgetCategory {
@@ -122,7 +122,7 @@ export default function BudgetManagementPage() {
       
       <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 20 }}>
         {/* Budget Summary */}
-        <AnimatedCard className="mx-4 mt-6 p-4">
+        <Card className="mx-4 mt-6 p-4">
           <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Monthly Budget Summary
           </Text>
@@ -163,7 +163,7 @@ export default function BudgetManagementPage() {
               </Text>
             </View>
           </View>
-        </AnimatedCard>
+        </Card>
 
         {/* Add Category Button */}
         <View className="mx-4 mt-6">
@@ -190,7 +190,7 @@ export default function BudgetManagementPage() {
               const isEditing = editingCategory === budget.name;
 
               return (
-                <AnimatedCard
+                <Card
                   key={budget.name}
                   className={`p-4 ${index > 0 ? 'mt-3' : ''}`}
                 >
@@ -277,7 +277,7 @@ export default function BudgetManagementPage() {
                       </Text>
                     </View>
                   )}
-                </AnimatedCard>
+                </Card>
               );
             })}
           </View>

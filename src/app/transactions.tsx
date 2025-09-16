@@ -6,7 +6,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
 import { Header } from '../components/Header';
 import { BottomNavigation } from '../components/BottomNavigation';
-import { AnimatedCard } from '../components/AnimatedCard';
+import { Card } from '../components/Card';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function TransactionsPage() {
@@ -153,7 +153,7 @@ export default function TransactionsPage() {
       
       <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 20 }}>
         {/* Summary Card */}
-        <AnimatedCard className="mx-4 mt-6 p-4">
+        <Card className="mx-4 mt-6 p-4">
           <View className="flex-row items-center justify-between">
             <View>
               <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -180,7 +180,7 @@ export default function TransactionsPage() {
               )}
             </View>
           </View>
-        </AnimatedCard>
+        </Card>
 
         {/* Filter and Sort Controls */}
         {!isMultiSelectMode && (
@@ -297,7 +297,7 @@ export default function TransactionsPage() {
               const isSelected = selectedTransactions.includes(transaction.id);
               
               return (
-                <AnimatedCard
+                <Card
                   key={transaction.id}
                   className={`p-4 ${index > 0 ? 'mt-3' : ''} ${
                     isSelected ? 'border-2 border-blue-500' : ''
@@ -365,11 +365,11 @@ export default function TransactionsPage() {
                       )}
                     </View>
                   </View>
-                </AnimatedCard>
+                </Card>
               );
             })
           ) : (
-            <AnimatedCard className="p-8 items-center">
+            <Card className="p-8 items-center">
               <Ionicons
                 name="receipt-outline"
                 size={48}
@@ -381,7 +381,7 @@ export default function TransactionsPage() {
               <Text className={`text-sm text-center ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
                 {filterBy !== 'all' ? 'Try changing the filter' : 'Add your first transaction to get started'}
               </Text>
-            </AnimatedCard>
+            </Card>
           )}
         </View>
 

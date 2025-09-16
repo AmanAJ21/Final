@@ -5,7 +5,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
 import { Header } from '../components/Header';
 import { BottomNavigation } from '../components/BottomNavigation';
-import { AnimatedCard } from '../components/AnimatedCard';
+import { Card } from '../components/Card';
 import { Ionicons } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('window');
@@ -132,7 +132,7 @@ export default function InsightsPage() {
         </View>
 
         {/* Financial Health Score */}
-        <AnimatedCard className="mx-4 mb-6 p-6">
+        <Card className="mx-4 mb-6 p-6">
           <View className="items-center">
             <Text className={`text-sm font-medium mb-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               Financial Health Score
@@ -164,10 +164,10 @@ export default function InsightsPage() {
                'Poor. Review your spending habits.'}
             </Text>
           </View>
-        </AnimatedCard>
+        </Card>
 
         {/* Income vs Expenses */}
-        <AnimatedCard className="mx-4 mb-6 p-4">
+        <Card className="mx-4 mb-6 p-4">
           <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Income vs Expenses
           </Text>
@@ -198,10 +198,10 @@ export default function InsightsPage() {
               </View>
             </View>
           </View>
-        </AnimatedCard>
+        </Card>
 
         {/* Daily Spending Pattern */}
-        <AnimatedCard className="mx-4 mb-6 p-4">
+        <Card className="mx-4 mb-6 p-4">
           <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Daily Spending Pattern
           </Text>
@@ -230,10 +230,10 @@ export default function InsightsPage() {
               </Text>
             ))}
           </View>
-        </AnimatedCard>
+        </Card>
 
         {/* Top Categories */}
-        <AnimatedCard className="mx-4 mb-6 p-4">
+        <Card className="mx-4 mb-6 p-4">
           <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Top Spending Categories
           </Text>
@@ -264,12 +264,12 @@ export default function InsightsPage() {
               );
             })}
           </View>
-        </AnimatedCard>
+        </Card>
 
         {/* Quick Stats */}
         <View className="mx-4 mb-6">
           <View className="flex-row space-x-3">
-            <AnimatedCard className="flex-1 p-4 items-center">
+            <Card className="flex-1 p-4 items-center">
               <Ionicons name="receipt" size={24} color="#3b82f6" />
               <Text className={`text-2xl font-bold mt-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 {periodTransactions.length}
@@ -277,9 +277,9 @@ export default function InsightsPage() {
               <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                 Transactions
               </Text>
-            </AnimatedCard>
+            </Card>
             
-            <AnimatedCard className="flex-1 p-4 items-center">
+            <Card className="flex-1 p-4 items-center">
               <Ionicons name="calendar" size={24} color="#10b981" />
               <Text className={`text-2xl font-bold mt-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 {Math.round(expenses / (selectedPeriod === 'week' ? 7 : selectedPeriod === 'month' ? 30 : 365))}
@@ -287,7 +287,7 @@ export default function InsightsPage() {
               <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                 Daily Avg
               </Text>
-            </AnimatedCard>
+            </Card>
           </View>
         </View>
 

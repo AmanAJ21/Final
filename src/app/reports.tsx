@@ -5,7 +5,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
 import { Header } from '../components/Header';
 import { BottomNavigation } from '../components/BottomNavigation';
-import { AnimatedCard } from '../components/AnimatedCard';
+import { Card } from '../components/Card';
 import { Ionicons } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('window');
@@ -178,7 +178,7 @@ export default function ReportsPage() {
           <View className="flex-row flex-wrap -mx-2">
             {reportCards.map((card, index) => (
               <View key={index} className="w-1/2 px-2 mb-4">
-                <AnimatedCard className="p-4 items-center">
+                <Card className="p-4 items-center">
                   <View className={`w-12 h-12 rounded-full items-center justify-center mb-3 ${card.bgColor}`}>
                     <Ionicons name={card.icon as any} size={24} color={card.color.includes('green') ? '#10b981' : card.color.includes('red') ? '#ef4444' : '#3b82f6'} />
                   </View>
@@ -188,14 +188,14 @@ export default function ReportsPage() {
                   <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                     {card.title}
                   </Text>
-                </AnimatedCard>
+                </Card>
               </View>
             ))}
           </View>
         </View>
 
         {/* Financial Health */}
-        <AnimatedCard className="mx-4 mb-6 p-4">
+        <Card className="mx-4 mb-6 p-4">
           <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Financial Health
           </Text>
@@ -231,10 +231,10 @@ export default function ReportsPage() {
               </View>
             </View>
           </View>
-        </AnimatedCard>
+        </Card>
 
         {/* Monthly Trend */}
-        <AnimatedCard className="mx-4 mb-6 p-4">
+        <Card className="mx-4 mb-6 p-4">
           <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             6-Month Trend
           </Text>
@@ -277,10 +277,10 @@ export default function ReportsPage() {
               <Text className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Expenses</Text>
             </View>
           </View>
-        </AnimatedCard>
+        </Card>
 
         {/* Top Categories */}
-        <AnimatedCard className="mx-4 mb-6 p-4">
+        <Card className="mx-4 mb-6 p-4">
           <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Top Spending Categories
           </Text>
@@ -311,7 +311,7 @@ export default function ReportsPage() {
               );
             })}
           </View>
-        </AnimatedCard>
+        </Card>
 
         <View className="h-20" />
       </ScrollView>

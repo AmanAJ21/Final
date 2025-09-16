@@ -6,7 +6,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
 import { Header } from '../components/Header';
 import { BottomNavigation } from '../components/BottomNavigation';
-import { AnimatedCard } from '../components/AnimatedCard';
+import { Card } from '../components/Card';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function TransactionDetailPage() {
@@ -109,7 +109,7 @@ export default function TransactionDetailPage() {
       
       <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 20 }}>
         {/* Main Transaction Card */}
-        <AnimatedCard className="mx-4 mt-6 p-6">
+        <Card className="mx-4 mt-6 p-6">
           <View className="items-center mb-6">
             <View className={`w-16 h-16 rounded-full items-center justify-center mb-3 ${
               transaction.type === 'income' ? 'bg-green-100' : 'bg-red-100'
@@ -201,7 +201,7 @@ export default function TransactionDetailPage() {
               </View>
             )}
           </View>
-        </AnimatedCard>
+        </Card>
 
         {/* Action Buttons */}
         <View className="mx-4 mt-6">
