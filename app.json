@@ -28,7 +28,8 @@
     "userInterfaceStyle": "automatic",
     "buildProperties": {
       "android.agpVersion": "8.1.1"
-    }
+    },
+    "package": "com.anonymous.myapp"
   },
   "name": "my-app",
   "slug": "my-app",
