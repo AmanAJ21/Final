@@ -4,18 +4,12 @@ import { useRouter } from 'expo-router';
 import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
 import { Ionicons } from '@expo/vector-icons';
+import { formatCurrency } from '../utils/formatCurrency';
 
 export function BalanceCard() {
   const router = useRouter();
   const { isDark } = useTheme();
   const { balance, totalIncome, totalExpense } = useTransactions();
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(amount);
-  };
 
   return (
     <View className={`rounded-3xl ${isDark ? 'bg-gradient-to-br from-gray-800 to-gray-900' : 'bg-gradient-to-br from-blue-500 to-purple-600'} shadow-lg`}>

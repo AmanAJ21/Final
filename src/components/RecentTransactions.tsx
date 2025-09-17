@@ -5,18 +5,12 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
 import { Card } from './Card';
 import { Ionicons } from '@expo/vector-icons';
+import { formatCurrency } from '../utils/formatCurrency';
 
 export function RecentTransactions() {
   const router = useRouter();
   const { isDark } = useTheme();
   const { transactions } = useTransactions();
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(amount);
-  };
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

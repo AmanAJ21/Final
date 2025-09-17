@@ -8,6 +8,7 @@ import { Header } from '../components/Header';
 import { BottomNavigation } from '../components/BottomNavigation';
 import { Card } from '../components/Card';
 import { Ionicons } from '@expo/vector-icons';
+import { formatCurrency } from '../utils/formatCurrency';
 
 export default function TransactionDetailPage() {
   const router = useRouter();
@@ -34,13 +35,6 @@ export default function TransactionDetailPage() {
       </View>
     );
   }
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(amount);
-  };
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
