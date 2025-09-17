@@ -6,7 +6,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
 import { Header } from '../components/Header';
 import { BottomNavigation } from '../components/BottomNavigation';
-import { AnimatedCard } from '../components/AnimatedCard';
+import { Card } from '../components/Card';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function SearchPage() {
@@ -144,7 +144,7 @@ export default function SearchPage() {
 
         {/* Search Results Summary */}
         {(searchQuery.trim() || selectedFilter !== 'all') && (
-          <AnimatedCard className="mx-4 mb-6 p-4">
+          <Card className="mx-4 mb-6 p-4">
             <View className="flex-row items-center justify-between">
               <View>
                 <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -169,14 +169,14 @@ export default function SearchPage() {
                 </Text>
               </TouchableOpacity>
             </View>
-          </AnimatedCard>
+          </Card>
         )}
 
         {/* Search Results */}
         <View className="mx-4">
           {filteredTransactions.length > 0 ? (
             filteredTransactions.map((transaction, index) => (
-              <AnimatedCard
+              <Card
                 key={transaction.id}
                 className={`p-4 ${index > 0 ? 'mt-3' : ''}`}
                 onPress={() => router.push(`/transaction-detail?id=${transaction.id}`)}
@@ -223,10 +223,10 @@ export default function SearchPage() {
                     </View>
                   </View>
                 </View>
-              </AnimatedCard>
+              </Card>
             ))
           ) : (
-            <AnimatedCard className="p-8 items-center">
+            <Card className="p-8 items-center">
               <Ionicons
                 name="search-outline"
                 size={48}
@@ -241,7 +241,7 @@ export default function SearchPage() {
                   : 'Search by title, category, amount, or description'
                 }
               </Text>
-            </AnimatedCard>
+            </Card>
           )}
         </View>
 
