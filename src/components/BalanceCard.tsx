@@ -16,39 +16,39 @@ export function BalanceCard() {
   const darkColors = ['#0f172a', '#1e293b', '#334155'];
 
   return (
-    <View className="rounded-3xl shadow-lg overflow-hidden">
+    <View className="rounded-4xl shadow-lg overflow-hidden">
       <LinearGradient
         colors={isDark ? darkColors : lightColors}
-        className="p-6"
+        className="p-8"
       >
-        <View className="flex-row items-center justify-between mb-2">
+        <View className="flex-row items-center justify-between mb-4">
           <Text className="text-white/80 text-sm font-medium">
             Total Balance
           </Text>
           <TouchableOpacity onPress={() => router.push('/statistics')}>
-            <Ionicons name="stats-chart-outline" size={20} color="rgba(255,255,255,0.8)" />
+            <Ionicons name="stats-chart-outline" size={24} color="rgba(255,255,255,0.8)" />
           </TouchableOpacity>
         </View>
         
-        <Text className={`text-4xl font-bold text-white mb-6`}>
+        <Text className={`text-4xl font-bold text-white mb-8`}>
           {formatCurrency(balance)}
         </Text>
         
         <View className="flex-row justify-between">
-          <View className="flex-1">
-            <View className="flex-row items-center mb-1">
-              <Ionicons name="arrow-down-outline" size={16} color="#10B981" />
-              <Text className="text-white/70 text-xs font-medium ml-1">Income</Text>
+          <View className="flex-1 space-y-2">
+            <View className="flex-row items-center space-x-2">
+              <Ionicons name="arrow-down-outline" size={18} color="#10B981" />
+              <Text className="text-white/70 text-sm font-medium">Income</Text>
             </View>
             <Text className="text-white font-semibold text-lg">
               {formatCurrency(totalIncome)}
             </Text>
           </View>
           
-          <View className="flex-1 items-end">
-            <View className="flex-row items-center mb-1">
-              <Ionicons name="arrow-up-outline" size={16} color="#F59E0B" />
-              <Text className="text-white/70 text-xs font-medium ml-1">Expenses</Text>
+          <View className="flex-1 items-end space-y-2">
+            <View className="flex-row items-center space-x-2">
+              <Ionicons name="arrow-up-outline" size={18} color="#F59E0B" />
+              <Text className="text-white/70 text-sm font-medium">Expenses</Text>
             </View>
             <Text className="text-white font-semibold text-lg">
               {formatCurrency(totalExpense)}

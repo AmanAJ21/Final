@@ -15,14 +15,16 @@ export function Card({
 }: CardProps) {
   const { isDark } = useTheme();
 
-  const baseClasses = `rounded-2xl p-4 ${
-    isDark ? 'bg-gray-800' : 'bg-white'
+  const baseClasses = `rounded-3xl ${
+    isDark ? 'bg-neutral-800' : 'bg-white'
   } ${className}`;
+
+  const hasPadding = className.includes('p-') || className.includes('px-') || className.includes('py-');
 
   if (onPress) {
     return (
       <TouchableOpacity
-        className={baseClasses}
+        className={`${baseClasses} ${!hasPadding ? 'p-5' : ''}`}
         onPress={onPress}
       >
         {children}
@@ -32,7 +34,7 @@ export function Card({
 
   return (
     <View
-      className={baseClasses}
+      className={`${baseClasses} ${!hasPadding ? 'p-5' : ''}`}
     >
       {children}
     </View>

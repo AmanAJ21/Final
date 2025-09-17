@@ -21,6 +21,12 @@ module.exports = {
           '900': '#111827',
         },
       },
+      spacing: {
+        '18': '4.5rem',
+      },
+      borderRadius: {
+        '4xl': '2rem',
+      }
     },
   },
   future: {

@@ -48,26 +48,25 @@ export function RecentTransactions() {
         </TouchableOpacity>
       </View>
 
-      <View className="space-y-4">
+      <View className="space-y-3">
         {recentTransactions.map((transaction, index) => (
           <Card
             key={transaction.id}
-            className="p-4"
             onPress={() => router.push(`/transaction-detail?id=${transaction.id}`)}
           >
             <View className="flex-row items-center justify-between">
               <View className="flex-row items-center flex-1">
-                <View className={`w-12 h-12 rounded-full items-center justify-center mr-3 ${
+                <View className={`w-12 h-12 rounded-full items-center justify-center mr-4 ${
                   transaction.type === 'income' ? 'bg-green-100' : 'bg-red-100'
                 }`}>
                   <Ionicons
                     name={getCategoryIcon(transaction.category) as any}
-                    size={20}
+                    size={24}
                     color={transaction.type === 'income' ? '#10b981' : '#ef4444'}
                   />
                 </View>
                 
-                <View className="flex-1">
+                <View className="flex-1 space-y-1">
                   <Text className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
                     {transaction.title}
                   </Text>
@@ -77,16 +76,16 @@ export function RecentTransactions() {
                 </View>
               </View>
 
-              <View className="items-end">
-                <Text className={`font-bold ${
+              <View className="items-end space-y-1">
+                <Text className={`font-bold text-base ${
                   transaction.type === 'income' ? 'text-green-500' : 'text-red-500'
                 }`}>
                   {transaction.type === 'income' ? '+' : '-'}{formatCurrency(transaction.amount)}
                 </Text>
-                <View className="mt-1">
+                <View>
                   <Ionicons
                     name="chevron-forward"
-                    size={16}
+                    size={18}
                     color={isDark ? '#6b7280' : '#9ca3af'}
                   />
                 </View>
@@ -97,18 +96,20 @@ export function RecentTransactions() {
       </View>
 
       {recentTransactions.length === 0 && (
-        <Card className="p-8 items-center">
+        <Card className="items-center justify-center p-8 space-y-4">
           <Ionicons
             name="receipt-outline"
-            size={48}
+            size={56}
             color={isDark ? '#6b7280' : '#9ca3af'}
           />
-          <Text className={`mt-2 text-center ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-            No transactions yet
-          </Text>
-          <Text className={`text-sm text-center ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-            Add your first transaction to get started
-          </Text>
+          <View className="space-y-2">
+            <Text className={`text-center font-semibold text-lg ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+              No transactions yet
+            </Text>
+            <Text className={`text-sm text-center ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+              Add your first transaction to get started
+            </Text>
+          </View>
         </Card>
       )}
     </View>

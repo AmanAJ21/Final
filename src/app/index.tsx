@@ -25,9 +25,9 @@ export default function HomePage() {
       <ScrollView
         className="flex-1"
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 20, paddingHorizontal: 16 }}
+        contentContainerStyle={{ paddingBottom: 20, paddingHorizontal: 20 }}
       >
-        <View className="space-y-12">
+        <View className="space-y-8 pt-4">
           <BalanceCard />
           <QuickActions />
           <SpendingTrends />
