@@ -25,21 +25,21 @@ export function Header({ title, showBackButton = false, onBackPress }: HeaderPro
   };
 
   const getThemeIcon = () => {
-    if (theme === 'light') return 'sunny';
-    if (theme === 'dark') return 'moon';
-    return 'phone-portrait';
+    if (theme === 'light') return 'sunny-outline';
+    if (theme === 'dark') return 'moon-outline';
+    return 'phone-portrait-outline';
   };
 
   return (
-    <View className={`flex-row items-center justify-between px-4 py-3 ${isDark ? 'bg-gray-900' : 'bg-white'} border-b ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
+    <View className={`flex-row items-center justify-between px-4 py-3`}>
       <View className="flex-row items-center flex-1">
         {showBackButton && (
           <TouchableOpacity
             onPress={onBackPress || (() => router.back())}
             className="mr-3 p-2"
           >
-            <Ionicons 
-              name="arrow-back" 
+                        <Ionicons 
+              name="arrow-back-outline" 
               size={24} 
               color={isDark ? '#fff' : '#000'} 
             />
@@ -51,13 +51,13 @@ export function Header({ title, showBackButton = false, onBackPress }: HeaderPro
       </View>
       
       <View className="flex-row items-center">
-        {title === 'Home' && (
+        {title === 'Dashboard' && (
           <TouchableOpacity
             onPress={() => router.push('/search')}
             className="p-2 mr-2"
           >
             <Ionicons 
-              name="search" 
+              name="search-outline" 
               size={24} 
               color={isDark ? '#fff' : '#000'} 
             />

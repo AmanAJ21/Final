@@ -4,8 +4,22 @@ import { useRouter } from 'expo-router';
 import { useTheme } from '../contexts/ThemeContext';
 import { Ionicons } from '@expo/vector-icons';
 
-export function QuickActions() {
+const ActionButton = ({ icon, label, screen, color, isDark }) => {
   const router = useRouter();
+  return (
+    <TouchableOpacity 
+      onPress={() => router.push(screen)}
+      className="flex-1 items-center space-y-2"
+    >
+      <View className={`w-16 h-16 rounded-full items-center justify-center ${isDark ? 'bg-neutral-700' : color}`}>
+        <Ionicons name={icon} size={30} color="white" />
+      </View>
+      <Text className={`font-semibold text-xs ${isDark ? 'text-neutral-300' : 'text-neutral-700'}`}>{label}</Text>
+    </TouchableOpacity>
+  );
+}
+
+export function QuickActions() {
   const { isDark } = useTheme();
 
   return (
@@ -13,25 +27,12 @@ export function QuickActions() {
       <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
         Quick Actions
       </Text>
-      
-      <TouchableOpacity
-        onPress={() => router.push('/statistics')}
-        className="p-4 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg"
-      >
-        <View className="flex-row items-center justify-between mb-2">
-          <View className="w-10 h-10 bg-white/20 rounded-full items-center justify-center">
-            <Ionicons name="bar-chart" size={20} color="white" />
-          </View>
-          <Ionicons name="chevron-forward" size={16} color="rgba(255,255,255,0.7)" />
-        </View>
-        
-        <Text className="text-white font-semibold text-base mb-1">
-          Analytics & Reports
-        </Text>
-        <Text className="text-white/70 text-sm">
-          View detailed spending insights and trends
-        </Text>
-      </TouchableOpacity>
+      <View className="flex-row justify-around">
+        <ActionButton icon="add-outline" label="Add" screen="/add-transaction" color="bg-secondary" isDark={isDark} />
+        <ActionButton icon="stats-chart-outline" label="Reports" screen="/reports" color="bg-accent" isDark={isDark} />
+        <ActionButton icon="wallet-outline" label="Budget" screen="/budget-management" color="bg-primary" isDark={isDark} />
+        <ActionButton icon="settings-outline" label="Settings" screen="/settings" color="bg-neutral-500" isDark={isDark} />
+      </View>
     </View>
   );
 }

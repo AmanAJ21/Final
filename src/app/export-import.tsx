@@ -7,11 +7,13 @@ import { Header } from '../components/Header';
 import { BottomNavigation } from '../components/BottomNavigation';
 import { Card } from '../components/Card';
 import { Ionicons } from '@expo/vector-icons';
+import * as DocumentPicker from 'expo-document-picker';
+import Papa from 'papaparse';
 
 export default function ExportImportPage() {
   const { top } = useSafeAreaInsets();
   const { isDark } = useTheme();
-  const { transactions } = useTransactions();
+  const { transactions, addMultipleTransactions } = useTransactions();
   const [isExporting, setIsExporting] = useState(false);
 
   const formatCurrency = (amount: number) => {
@@ -64,12 +66,48 @@ export default function ExportImportPage() {
     }
   };
 
-  const handleImport = () => {
-    Alert.alert(
-      'Import Transactions',
-      'Import functionality will be available in a future update. You will be able to import CSV or JSON files.',
-      [{ text: 'OK' }]
-    );
+  const handleImport = async () => {
+    try {
+      const result = await DocumentPicker.getDocumentAsync({
+        type: ['text/csv', 'application/json'],
+      });
+
+      if (result.canceled) {
+        return;
+      }
+
+      const fileUri = result.assets[0].uri;
+      const fileContent = await fetch(fileUri).then(res => res.text());
+
+      if (result.assets[0].mimeType === 'application/json') {
+        const newTransactions = JSON.parse(fileContent);
+        addMultipleTransactions(newTransactions);
+        Alert.alert('Success', 'Transactions imported successfully from JSON!');
+      } else if (result.assets[0].mimeType === 'text/csv') {
+        Papa.parse(fileContent, {
+          header: true,
+          skipEmptyLines: true,
+          complete: (results) => {
+            const newTransactions = results.data.map((row: any) => ({
+              title: row.Title,
+              amount: parseFloat(row.Amount),
+              type: row.Type as 'income' | 'expense',
+              category: row.Category,
+              date: row.Date,
+              description: row.Description,
+            }));
+            addMultipleTransactions(newTransactions);
+            Alert.alert('Success', 'Transactions imported successfully from CSV!');
+          },
+          error: (error) => {
+            Alert.alert('Error', 'Failed to parse CSV file.');
+          }
+        });
+      }
+
+    } catch (error) {
+      Alert.alert('Error', 'Failed to import transactions. Please try again.');
+    }
   };
 
   const exportOptions = [
@@ -123,7 +161,7 @@ export default function ExportImportPage() {
       
       <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 20 }}>
         {/* Statistics Card */}
-        <Card className="mx-4 mt-6 p-4">
+        <Card className="mx-4 mt-6">
           <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Data Overview
           </Text>
@@ -163,7 +201,7 @@ export default function ExportImportPage() {
             {exportOptions.map((option, index) => (
               <Card
                 key={option.id}
-                className={`p-4 ${index > 0 ? 'mt-3' : ''}`}
+                className={`${index > 0 ? 'mt-3' : ''}`}
                 onPress={option.onPress}
               >
                 <View className="flex-row items-center">
@@ -201,7 +239,7 @@ export default function ExportImportPage() {
             {importOptions.map((option, index) => (
               <Card
                 key={option.id}
-                className={`p-4 ${index > 0 ? 'mt-3' : ''}`}
+                className={`${index > 0 ? 'mt-3' : ''}`}
                 onPress={option.onPress}
               >
                 <View className="flex-row items-center">
@@ -230,7 +268,7 @@ export default function ExportImportPage() {
         </View>
 
         {/* Backup Info */}
-        <Card className="mx-4 mt-6 p-4">
+        <Card className="mx-4 mt-6">
           <View className="flex-row items-start">
             <View className={`w-10 h-10 rounded-full items-center justify-center mr-3 ${isDark ? 'bg-blue-900' : 'bg-blue-100'}`}>
               <Ionicons name="information-circle" size={20} color="#3b82f6" />

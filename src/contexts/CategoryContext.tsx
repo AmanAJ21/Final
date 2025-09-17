@@ -15,6 +15,7 @@ interface CategoryContextType {
   updateCategory: (id: string, updates: Partial<Category>) => void;
   deleteCategory: (id: string) => void;
   getCategoriesByType: (type: 'income' | 'expense') => Category[];
+  resetCategories: () => void;
 }
 
 const CategoryContext = createContext<CategoryContextType | undefined>(undefined);
@@ -63,13 +64,18 @@ export function CategoryProvider({ children }: { children: React.ReactNode }) {
     return categories.filter(category => category.type === type);
   };
 
+  const resetCategories = () => {
+    setCategories(prev => prev.filter(c => c.isDefault));
+  };
+
   return (
     <CategoryContext.Provider value={{
       categories,
       addCategory,
       updateCategory,
       deleteCategory,
-      getCategoriesByType
+      getCategoriesByType,
+      resetCategories
     }}>
       {children}
     </CategoryContext.Provider>

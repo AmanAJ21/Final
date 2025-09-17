@@ -4,6 +4,8 @@ import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
+import { useCategories } from '../contexts/CategoryContext';
+import { useRecurringTransactions } from '../contexts/RecurringTransactionContext';
 import { Header } from '../components/Header';
 import { BottomNavigation } from '../components/BottomNavigation';
 import { Ionicons } from '@expo/vector-icons';
@@ -12,7 +14,9 @@ export default function SettingsPage() {
   const router = useRouter();
   const { top } = useSafeAreaInsets();
   const { isDark, theme, setTheme } = useTheme();
-  const { transactions } = useTransactions();
+  const { transactions, clearAllData } = useTransactions();
+  const { resetCategories } = useCategories();
+  const { resetRecurringTransactions } = useRecurringTransactions();
 
   const handleExportData = () => {
     Alert.alert(
@@ -33,14 +37,16 @@ export default function SettingsPage() {
   const handleClearData = () => {
     Alert.alert(
       'Clear All Data',
-      'This will permanently delete all your transactions. This action cannot be undone.',
+      'This will permanently delete all your transactions, and reset your categories and recurring transactions to the default settings. This action cannot be undone.',
       [
         { text: 'Cancel', style: 'cancel' },
         {
           text: 'Delete All',
           style: 'destructive',
           onPress: () => {
-            // This would clear all data in a real implementation
+            clearAllData();
+            resetCategories();
+            resetRecurringTransactions();
             Alert.alert('Success', 'All data has been cleared.');
           }
         }

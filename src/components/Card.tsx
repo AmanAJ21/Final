@@ -15,7 +15,7 @@ export function Card({
 }: CardProps) {
   const { isDark } = useTheme();
 
-  const baseClasses = `rounded-2xl ${
+  const baseClasses = `rounded-2xl p-4 ${
     isDark ? 'bg-gray-800' : 'bg-white'
   } ${className}`;
 

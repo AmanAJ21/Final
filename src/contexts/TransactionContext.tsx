@@ -13,8 +13,10 @@ export interface Transaction {
 interface TransactionContextType {
   transactions: Transaction[];
   addTransaction: (transaction: Omit<Transaction, 'id'>) => void;
+  addMultipleTransactions: (transactions: Omit<Transaction, 'id'>[]) => void;
   deleteTransaction: (id: string) => void;
   updateTransaction: (id: string, transaction: Partial<Transaction>) => void;
+  clearAllData: () => void;
   totalIncome: number;
   totalExpense: number;
   balance: number;
@@ -52,6 +54,14 @@ export function TransactionProvider({ children }: { children: React.ReactNode })
     setTransactions(prev => [newTransaction, ...prev]);
   };
 
+  const addMultipleTransactions = (transactions: Omit<Transaction, 'id'>[]) => {
+    const newTransactions: Transaction[] = transactions.map(t => ({
+      ...t,
+      id: Date.now().toString() + Math.random().toString(),
+    }));
+    setTransactions(prev => [...newTransactions, ...prev]);
+  };
+
   const deleteTransaction = (id: string) => {
     setTransactions(prev => prev.filter(t => t.id !== id));
   };
@@ -60,6 +70,10 @@ export function TransactionProvider({ children }: { children: React.ReactNode })
     setTransactions(prev => 
       prev.map(t => t.id === id ? { ...t, ...updatedTransaction } : t)
     );
+  };
+
+  const clearAllData = () => {
+    setTransactions([]);
   };
 
   const totalIncome = transactions
@@ -76,8 +90,10 @@ export function TransactionProvider({ children }: { children: React.ReactNode })
     <TransactionContext.Provider value={{
       transactions,
       addTransaction,
+      addMultipleTransactions,
       deleteTransaction,
       updateTransaction,
+      clearAllData,
       totalIncome,
       totalExpense,
       balance

@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { ThemeProvider } from '../contexts/ThemeContext';
 import { TransactionProvider } from '../contexts/TransactionContext';
 import { CategoryProvider } from '../contexts/CategoryContext';
+import { RecurringTransactionProvider } from '../contexts/RecurringTransactionContext';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function Layout() {
@@ -11,10 +12,12 @@ export default function Layout() {
     <ThemeProvider>
       <SafeAreaProvider>
         <CategoryProvider>
-          <TransactionProvider>
-            <StatusBar style="auto" />
-            <Slot />
-          </TransactionProvider>
+          <RecurringTransactionProvider>
+            <TransactionProvider>
+              <StatusBar style="auto" />
+              <Slot />
+            </TransactionProvider>
+          </RecurringTransactionProvider>
         </CategoryProvider>
       </SafeAreaProvider>
     </ThemeProvider >

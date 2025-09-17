@@ -7,19 +7,18 @@ import { Header } from '../components/Header';
 import { BottomNavigation } from '../components/BottomNavigation';
 import { Card } from '../components/Card';
 import { Ionicons } from '@expo/vector-icons';
+import { useCategories } from '../contexts/CategoryContext';
 
 export default function CategoriesPage() {
   const { top } = useSafeAreaInsets();
   const { isDark } = useTheme();
   const { transactions } = useTransactions();
+  const { categories, addCategory, getCategoriesByType } = useCategories();
   const [selectedType, setSelectedType] = useState<'income' | 'expense'>('expense');
   const [showAddCategory, setShowAddCategory] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState('');
 
-  const defaultCategories = {
-    income: ['Work', 'Business', 'Investment', 'Gift', 'Other'],
-    expense: ['Food', 'Transport', 'Shopping', 'Entertainment', 'Bills', 'Health', 'Education', 'Other']
-  };
+  
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -73,18 +72,24 @@ export default function CategoriesPage() {
       return;
     }
 
-    if (defaultCategories[selectedType].includes(newCategoryName.trim())) {
+    if (getCategoriesByType(selectedType).find(c => c.name.toLowerCase() === newCategoryName.trim().toLowerCase())) {
       Alert.alert('Error', 'Category already exists');
       return;
     }
 
-    // In a real app, you would save this to your category context/storage
-    Alert.alert('Success', `Category "${newCategoryName}" will be available in future updates!`);
+    addCategory({
+      name: newCategoryName.trim(),
+      type: selectedType,
+      icon: 'help-circle-outline', // default icon
+      color: '#808080', // default color
+      isDefault: false,
+    });
+
     setNewCategoryName('');
     setShowAddCategory(false);
   };
 
-  const categories = defaultCategories[selectedType];
+  const currentCategories = getCategoriesByType(selectedType);
 
   return (
     <View className={`flex-1 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`} style={{ paddingTop: top }}>
@@ -146,7 +151,7 @@ export default function CategoriesPage() {
 
         {/* Add Category Form */}
         {showAddCategory && (
-          <Card className="mx-4 mb-4 p-4">
+          <Card className="mx-4 mb-4">
             <Text className={`text-lg font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
               Add New {selectedType === 'income' ? 'Income' : 'Expense'} Category
             </Text>
@@ -184,16 +189,16 @@ export default function CategoriesPage() {
 
         {/* Categories List */}
         <View className="mx-4">
-          {categories.map((category, index) => {
-            const stats = getCategoryStats(category, selectedType);
+          {currentCategories.map((category, index) => {
+            const stats = getCategoryStats(category.name, selectedType);
 
             return (
-              <Card key={category} className={`p-4 ${index > 0 ? 'mt-3' : ''}`}>
+              <Card key={category.id} className={`${index > 0 ? 'mt-3' : ''}`}>
                 <View className="flex-row items-center">
                   <View className={`w-12 h-12 rounded-full items-center justify-center mr-4 ${selectedType === 'income' ? 'bg-green-100' : 'bg-red-100'
                     }`}>
                     <Ionicons
-                      name={getCategoryIcon(category) as any}
+                      name={getCategoryIcon(category.name) as any}
                       size={24}
                       color={selectedType === 'income' ? '#10b981' : '#ef4444'}
                     />
@@ -201,7 +206,7 @@ export default function CategoriesPage() {
 
                   <View className="flex-1">
                     <Text className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                      {category}
+                      {category.name}
                     </Text>
                     <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                       {stats.count} transactions

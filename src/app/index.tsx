@@ -1,5 +1,5 @@
 import React from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, StatusBar } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from '../contexts/ThemeContext';
 import { Header } from '../components/Header';
@@ -16,24 +16,25 @@ export default function HomePage() {
 
   return (
     <View
-      className={`flex-1 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}
+      className={`flex-1 ${isDark ? 'bg-neutral-900' : 'bg-neutral-50'}`}
       style={{ paddingTop: top }}
     >
-      <Header title="Home" />
+      <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
+      <Header title="Dashboard" />
 
       <ScrollView
         className="flex-1"
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 20, paddingHorizontal: 16 }}
       >
-        <View className="space-y-6">
+        <View className="space-y-8">
           <BalanceCard />
           <QuickActions />
           <SpendingTrends />
           <BudgetOverview />
           <RecentTransactions />
         </View>
-        <View className="h-20" />
+        <View className="h-24" />
       </ScrollView>
 
       <BottomNavigation />

@@ -6,6 +6,7 @@ import { Header } from '../components/Header';
 import { BottomNavigation } from '../components/BottomNavigation';
 import { Card } from '../components/Card';
 import { Ionicons } from '@expo/vector-icons';
+import { useRecurringTransactions } from '../contexts/RecurringTransactionContext';
 
 interface RecurringTransaction {
   id: string;
@@ -22,54 +23,9 @@ interface RecurringTransaction {
 export default function RecurringPage() {
   const { top } = useSafeAreaInsets();
   const { isDark } = useTheme();
+  const { recurringTransactions, toggleRecurringTransaction } = useRecurringTransactions();
   
-  // Mock data for recurring transactions
-  const [recurringTransactions] = useState<RecurringTransaction[]>([
-    {
-      id: '1',
-      title: 'Monthly Salary',
-      amount: 5000,
-      type: 'income',
-      category: 'Work',
-      frequency: 'monthly',
-      nextDate: '2024-02-01',
-      isActive: true,
-      description: 'Regular monthly salary'
-    },
-    {
-      id: '2',
-      title: 'Rent Payment',
-      amount: 1200,
-      type: 'expense',
-      category: 'Bills',
-      frequency: 'monthly',
-      nextDate: '2024-02-01',
-      isActive: true,
-      description: 'Monthly rent payment'
-    },
-    {
-      id: '3',
-      title: 'Netflix Subscription',
-      amount: 15.99,
-      type: 'expense',
-      category: 'Entertainment',
-      frequency: 'monthly',
-      nextDate: '2024-02-15',
-      isActive: true,
-      description: 'Monthly Netflix subscription'
-    },
-    {
-      id: '4',
-      title: 'Weekly Groceries',
-      amount: 150,
-      type: 'expense',
-      category: 'Food',
-      frequency: 'weekly',
-      nextDate: '2024-01-28',
-      isActive: false,
-      description: 'Weekly grocery shopping'
-    }
-  ]);
+  
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -126,25 +82,23 @@ export default function RecurringPage() {
   };
 
   const handleToggleActive = (id: string) => {
-    Alert.alert(
-      'Toggle Recurring Transaction',
-      'This feature will be available in a future update.',
-      [{ text: 'OK' }]
-    );
+    toggleRecurringTransaction(id);
   };
 
   const handleAddRecurring = () => {
+    // TODO: Implement UI for adding recurring transactions
     Alert.alert(
       'Add Recurring Transaction',
-      'This feature will be available in a future update. You will be able to set up automatic recurring transactions.',
+      'This feature is under development. You will be able to set up automatic recurring transactions in a future update.',
       [{ text: 'OK' }]
     );
   };
 
   const handleEditRecurring = (id: string) => {
+    // TODO: Implement UI for editing recurring transactions
     Alert.alert(
       'Edit Recurring Transaction',
-      'This feature will be available in a future update.',
+      'This feature is under development. You will be able to edit recurring transactions in a future update.',
       [{ text: 'OK' }]
     );
   };
@@ -172,7 +126,7 @@ export default function RecurringPage() {
       
       <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 20 }}>
         {/* Summary Card */}
-        <Card className="mx-4 mt-6 p-4">
+        <Card className="mx-4 mt-6">
           <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Monthly Projection
           </Text>
@@ -219,7 +173,7 @@ export default function RecurringPage() {
               {activeTransactions.map((transaction, index) => (
                 <Card
                   key={transaction.id}
-                  className={`p-4 ${index > 0 ? 'mt-3' : ''}`}
+                  className={`${index > 0 ? 'mt-3' : ''}`}
                   onPress={() => handleEditRecurring(transaction.id)}
                 >
                   <View className="flex-row items-center justify-between">
@@ -278,7 +232,7 @@ export default function RecurringPage() {
               ))}
             </View>
           ) : (
-            <Card className="p-8 items-center">
+            <Card className="items-center">
               <Ionicons
                 name="repeat-outline"
                 size={48}
@@ -305,7 +259,7 @@ export default function RecurringPage() {
               {inactiveTransactions.map((transaction, index) => (
                 <Card
                   key={transaction.id}
-                  className={`p-4 ${index > 0 ? 'mt-3' : ''} opacity-60`}
+                  className={`${index > 0 ? 'mt-3' : ''} opacity-60`}
                   onPress={() => handleEditRecurring(transaction.id)}
                 >
                   <View className="flex-row items-center justify-between">

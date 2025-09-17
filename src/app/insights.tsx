@@ -132,7 +132,7 @@ export default function InsightsPage() {
         </View>
 
         {/* Financial Health Score */}
-        <Card className="mx-4 mb-6 p-6">
+        <Card className="mx-4 mb-6">
           <View className="items-center">
             <Text className={`text-sm font-medium mb-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               Financial Health Score
@@ -167,7 +167,7 @@ export default function InsightsPage() {
         </Card>
 
         {/* Income vs Expenses */}
-        <Card className="mx-4 mb-6 p-4">
+        <Card className="mx-4 mb-6">
           <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Income vs Expenses
           </Text>
@@ -201,7 +201,7 @@ export default function InsightsPage() {
         </Card>
 
         {/* Daily Spending Pattern */}
-        <Card className="mx-4 mb-6 p-4">
+        <Card className="mx-4 mb-6">
           <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Daily Spending Pattern
           </Text>
@@ -233,7 +233,7 @@ export default function InsightsPage() {
         </Card>
 
         {/* Top Categories */}
-        <Card className="mx-4 mb-6 p-4">
+        <Card className="mx-4 mb-6">
           <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Top Spending Categories
           </Text>
@@ -269,7 +269,7 @@ export default function InsightsPage() {
         {/* Quick Stats */}
         <View className="mx-4 mb-6">
           <View className="flex-row space-x-3">
-            <Card className="flex-1 p-4 items-center">
+            <Card className="flex-1 items-center">
               <Ionicons name="receipt" size={24} color="#3b82f6" />
               <Text className={`text-2xl font-bold mt-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 {periodTransactions.length}
@@ -279,7 +279,7 @@ export default function InsightsPage() {
               </Text>
             </Card>
             
-            <Card className="flex-1 p-4 items-center">
+            <Card className="flex-1 items-center">
               <Ionicons name="calendar" size={24} color="#10b981" />
               <Text className={`text-2xl font-bold mt-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 {Math.round(expenses / (selectedPeriod === 'week' ? 7 : selectedPeriod === 'month' ? 30 : 365))}

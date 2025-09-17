@@ -122,7 +122,7 @@ export default function BudgetManagementPage() {
       
       <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 20 }}>
         {/* Budget Summary */}
-        <Card className="mx-4 mt-6 p-4">
+        <Card className="mx-4 mt-6">
           <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Monthly Budget Summary
           </Text>
@@ -192,7 +192,7 @@ export default function BudgetManagementPage() {
               return (
                 <Card
                   key={budget.name}
-                  className={`p-4 ${index > 0 ? 'mt-3' : ''}`}
+                  className={`${index > 0 ? 'mt-3' : ''}`}
                 >
                   <View className="flex-row items-center justify-between mb-3">
                     <View className="flex-row items-center flex-1">

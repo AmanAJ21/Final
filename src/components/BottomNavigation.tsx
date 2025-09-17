@@ -29,9 +29,10 @@ export function BottomNavigation() {
     {
       id: 'add',
       title: 'Add',
-      icon: 'add-circle-outline',
-      activeIcon: 'add-circle',
+      icon: 'add-outline',
+      activeIcon: 'add',
       route: '/add-transaction',
+      isFab: true,
     },
     {
       id: 'calendar',
@@ -56,38 +57,35 @@ export function BottomNavigation() {
 
   return (
     <View 
-      className={`${isDark ? 'bg-gray-900' : 'bg-white'} border-t ${isDark ? 'border-gray-700' : 'border-gray-200'}`}
+      className={`absolute bottom-0 left-0 right-0`}
       style={{ paddingBottom: bottom }}
     >
-      <View className="flex-row justify-around items-center py-2">
+      <View className={`flex-row justify-around items-center mx-4 rounded-full ${isDark ? 'bg-neutral-800' : 'bg-white'} shadow-lg`}>
         {tabs.map((tab) => {
           const active = isActive(tab.route);
+          if (tab.isFab) {
+            return (
+              <TouchableOpacity
+                key={tab.id}
+                onPress={() => router.push(tab.route as any)}
+                className="-mt-8 items-center justify-center w-16 h-16 rounded-full bg-primary shadow-lg"
+              >
+                <Ionicons name={tab.activeIcon as any} size={32} color="white" />
+              </TouchableOpacity>
+            )
+          }
           return (
             <TouchableOpacity
               key={tab.id}
               onPress={() => router.push(tab.route as any)}
-              className="items-center justify-center py-2 px-3 min-w-[60px]"
+              className="items-center justify-center py-4 px-3"
             >
-              <View className={`items-center justify-center w-8 h-8 rounded-full ${
-                active ? (isDark ? 'bg-blue-600' : 'bg-blue-500') : 'bg-transparent'
-              }`}>
-                <Ionicons
-                  name={(active ? tab.activeIcon : tab.icon) as any}
-                  size={20}
-                  color={
-                    active 
-                      ? '#ffffff'
-                      : isDark 
-                        ? '#9ca3af' 
-                        : '#6b7280'
-                  }
-                />
-              </View>
-              <Text className={`text-xs mt-1 ${
-                active 
-                  ? (isDark ? 'text-blue-400' : 'text-blue-500')
-                  : (isDark ? 'text-gray-400' : 'text-gray-600')
-              }`}>
+              <Ionicons
+                name={(active ? tab.activeIcon : tab.icon) as any}
+                size={24}
+                color={active ? (isDark ? '#10B981' : '#1E3A8A') : (isDark ? '#9ca3af' : '#6b7280')}
+              />
+              <Text className={`text-xs mt-1 ${active ? (isDark ? 'text-secondary' : 'text-primary') : (isDark ? 'text-gray-400' : 'text-gray-600')}`}>
                 {tab.title}
               </Text>
             </TouchableOpacity>
