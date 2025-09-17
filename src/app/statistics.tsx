@@ -15,9 +15,9 @@ export default function StatisticsPage() {
   const [selectedPeriod, setSelectedPeriod] = useState<'week' | 'month' | 'quarter' | 'year'>('month');
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-IN', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'INR',
     }).format(amount);
   };
 
@@ -349,7 +349,7 @@ export default function StatisticsPage() {
               <Text className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 {transactions.length > 0
                   ? formatCurrency(transactions.reduce((sum, t) => sum + t.amount, 0) / transactions.length)
-                  : '$0.00'
+                  : formatCurrency(0)
                 }
               </Text>
             </View>

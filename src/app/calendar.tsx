@@ -15,9 +15,9 @@ export default function CalendarPage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-IN', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'INR',
     }).format(amount);
   };
 
