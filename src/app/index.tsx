@@ -27,7 +27,7 @@ export default function HomePage() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 20, paddingHorizontal: 16 }}
       >
-        <View className="space-y-8">
+        <View className="space-y-12">
           <BalanceCard />
           <QuickActions />
           <SpendingTrends />

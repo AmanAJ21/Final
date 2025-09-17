@@ -48,7 +48,7 @@ export function RecentTransactions() {
         </TouchableOpacity>
       </View>
 
-      <View className="space-y-3">
+      <View className="space-y-4">
         {recentTransactions.map((transaction, index) => (
           <Card
             key={transaction.id}

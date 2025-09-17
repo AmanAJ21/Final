@@ -5,15 +5,22 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useTransactions } from '../contexts/TransactionContext';
 import { Ionicons } from '@expo/vector-icons';
 import { formatCurrency } from '../utils/formatCurrency';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export function BalanceCard() {
   const router = useRouter();
   const { isDark } = useTheme();
   const { balance, totalIncome, totalExpense } = useTransactions();
 
+  const lightColors = ['#4c669f', '#3b5998', '#192f6a'];
+  const darkColors = ['#0f172a', '#1e293b', '#334155'];
+
   return (
-    <View className={`rounded-3xl shadow-lg ${isDark ? 'bg-neutral-800' : 'bg-primary'}`}>
-      <View className="p-6">
+    <View className="rounded-3xl shadow-lg overflow-hidden">
+      <LinearGradient
+        colors={isDark ? darkColors : lightColors}
+        className="p-6"
+      >
         <View className="flex-row items-center justify-between mb-2">
           <Text className="text-white/80 text-sm font-medium">
             Total Balance
@@ -48,7 +55,7 @@ export function BalanceCard() {
             </Text>
           </View>
         </View>
-      </View>
+      </LinearGradient>
     </View>
   );
 }
