@@ -12,7 +12,7 @@ const ActionButton = ({ icon, label, screen, color, isDark }) => {
       onPress={() => router.push(screen)}
       className="flex-1 items-center space-y-2"
     >
-      <View className={`w-16 h-16 rounded-full items-center justify-center ${isDark ? 'bg-neutral-700' : color}`}>
+      <View className={`w-16 h-16 rounded-full items-center justify-center ${color}`}>
         <Ionicons name={icon} size={30} color="white" />
       </View>
       <Text className={`font-semibold text-sm ${isDark ? 'text-neutral-300' : 'text-neutral-700'}`}>{label}</Text>

@@ -147,63 +147,65 @@ export default function SettingsPage() {
       <Header title="Settings" />
 
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
-        {settingSections.map((section, sectionIndex) => (
-          <View key={sectionIndex} className="mt-6">
-            <Text className={`text-sm font-medium mb-3 mx-4 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-              {section.title.toUpperCase()}
-            </Text>
+        <View className="p-5 space-y-8">
+          {settingSections.map((section, sectionIndex) => (
+            <View key={sectionIndex}>
+              <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                {section.title}
+              </Text>
 
-            <View className={`mx-4 rounded-2xl ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-sm overflow-hidden`}>
-              {section.items.map((item, itemIndex) => (
-                <TouchableOpacity
-                  key={itemIndex}
-                  onPress={item.onPress}
-                  className={`flex-row items-center p-4 ${itemIndex < section.items.length - 1
-                      ? `border-b ${isDark ? 'border-gray-700' : 'border-gray-100'}`
-                      : ''
-                    }`}
-                >
-                  <View className={`w-10 h-10 rounded-full items-center justify-center mr-3 ${item.destructive
-                      ? 'bg-red-100'
-                      : isDark ? 'bg-gray-700' : 'bg-gray-100'
-                    }`}>
-                    <Ionicons
-                      name={item.icon as any}
-                      size={20}
-                      color={
-                        item.destructive
-                          ? '#ef4444'
-                          : isDark ? '#9ca3af' : '#6b7280'
-                      }
-                    />
-                  </View>
-
-                  <View className="flex-1">
-                    <Text className={`font-medium ${item.destructive
-                        ? 'text-red-500'
-                        : isDark ? 'text-white' : 'text-gray-900'
+              <Card className="p-0 overflow-hidden">
+                {section.items.map((item, itemIndex) => (
+                  <TouchableOpacity
+                    key={itemIndex}
+                    onPress={item.onPress}
+                    className={`flex-row items-center p-5 ${itemIndex < section.items.length - 1
+                        ? `border-b ${isDark ? 'border-gray-700' : 'border-gray-100'}`
+                        : ''
+                      }`}
+                  >
+                    <View className={`w-12 h-12 rounded-full items-center justify-center mr-4 ${item.destructive
+                        ? (isDark ? 'bg-red-900' : 'bg-red-100')
+                        : (isDark ? 'bg-gray-700' : 'bg-gray-100')
                       }`}>
-                      {item.title}
-                    </Text>
-                    {item.subtitle && (
-                      <Text className={`text-sm mt-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                        {item.subtitle}
-                      </Text>
-                    )}
-                  </View>
+                      <Ionicons
+                        name={item.icon as any}
+                        size={24}
+                        color={
+                          item.destructive
+                            ? '#ef4444'
+                            : isDark ? '#9ca3af' : '#6b7280'
+                        }
+                      />
+                    </View>
 
-                  {item.onPress && (
-                    <Ionicons
-                      name="chevron-forward"
-                      size={20}
-                      color={isDark ? '#6b7280' : '#9ca3af'}
-                    />
-                  )}
-                </TouchableOpacity>
-              ))}
+                    <View className="flex-1">
+                      <Text className={`font-semibold text-lg ${item.destructive
+                          ? 'text-red-500'
+                          : isDark ? 'text-white' : 'text-gray-900'
+                        }`}>
+                        {item.title}
+                      </Text>
+                      {item.subtitle && (
+                        <Text className={`text-base mt-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                          {item.subtitle}
+                        </Text>
+                      )}
+                    </View>
+
+                    {item.onPress && (
+                      <Ionicons
+                        name="chevron-forward"
+                        size={24}
+                        color={isDark ? '#6b7280' : '#9ca3af'}
+                      />
+                    )}
+                  </TouchableOpacity>
+                ))}
+              </Card>
             </View>
-          </View>
-        ))}
+          ))}
+        </View>
 
         <View className="h-20" />
       </ScrollView>

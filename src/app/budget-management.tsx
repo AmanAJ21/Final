@@ -121,165 +121,165 @@ export default function BudgetManagementPage() {
       <Header title="Budget Management" showBackButton />
       
       <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 20 }}>
-        {/* Budget Summary */}
-        <Card className="mx-4 mt-6">
-          <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Monthly Budget Summary
-          </Text>
-          
-          <View className="space-y-3">
-            <View className="flex-row justify-between items-center">
-              <Text className={`${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Total Budget</Text>
-              <Text className={`font-semibold text-blue-500`}>{formatCurrency(totalBudget)}</Text>
-            </View>
+        <View className="p-5 space-y-6">
+          {/* Budget Summary */}
+          <Card>
+            <Text className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              Monthly Budget Summary
+            </Text>
             
-            <View className="flex-row justify-between items-center">
-              <Text className={`${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Total Spent</Text>
-              <Text className={`font-semibold text-red-500`}>{formatCurrency(totalSpent)}</Text>
-            </View>
-            
-            <View className={`border-t pt-3 ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
-              <View className="flex-row justify-between items-center">
-                <Text className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Remaining</Text>
-                <Text className={`font-bold ${remainingBudget >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                  {formatCurrency(remainingBudget)}
+            <View className="space-y-4">
+              <View className="space-y-2">
+                <View className="flex-row justify-between items-center">
+                  <Text className={`text-base ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Total Budget</Text>
+                  <Text className={`font-semibold text-lg text-blue-500`}>{formatCurrency(totalBudget)}</Text>
+                </View>
+
+                <View className="flex-row justify-between items-center">
+                  <Text className={`text-base ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Total Spent</Text>
+                  <Text className={`font-semibold text-lg text-red-500`}>{formatCurrency(totalSpent)}</Text>
+                </View>
+              </View>
+
+              <View className={`border-t pt-4 ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
+                <View className="flex-row justify-between items-center">
+                  <Text className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Remaining</Text>
+                  <Text className={`text-xl font-bold ${remainingBudget >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                    {formatCurrency(remainingBudget)}
+                  </Text>
+                </View>
+              </View>
+
+              {/* Progress Bar */}
+              <View className="space-y-2">
+                <View className={`h-4 rounded-full ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}>
+                  <View
+                    className={`h-4 rounded-full ${
+                      totalSpent > totalBudget ? 'bg-red-500' :
+                      (totalSpent / totalBudget) > 0.8 ? 'bg-yellow-500' : 'bg-green-500'
+                    }`}
+                    style={{ width: `${Math.min((totalSpent / totalBudget) * 100, 100)}%` }}
+                  />
+                </View>
+                <Text className={`text-sm text-center font-medium ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                  {((totalSpent / totalBudget) * 100).toFixed(1)}% of total budget used
                 </Text>
               </View>
             </View>
+          </Card>
 
-            {/* Progress Bar */}
-            <View className="mt-3">
-              <View className={`h-3 rounded-full ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}>
-                <View 
-                  className={`h-3 rounded-full ${
-                    totalSpent > totalBudget ? 'bg-red-500' : 
-                    (totalSpent / totalBudget) > 0.8 ? 'bg-yellow-500' : 'bg-green-500'
-                  }`}
-                  style={{ width: `${Math.min((totalSpent / totalBudget) * 100, 100)}%` }}
-                />
-              </View>
-              <Text className={`text-xs mt-1 text-center ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                {((totalSpent / totalBudget) * 100).toFixed(1)}% of total budget used
-              </Text>
-            </View>
-          </View>
-        </Card>
-
-        {/* Add Category Button */}
-        <View className="mx-4 mt-6">
+          {/* Add Category Button */}
           <TouchableOpacity
             onPress={handleAddCategory}
-            className="flex-row items-center justify-center py-4 rounded-2xl border-2 border-dashed border-blue-500"
+            className="flex-row items-center justify-center py-5 rounded-2xl border-2 border-dashed border-blue-500"
           >
-            <Ionicons name="add-circle" size={20} color="#3b82f6" />
-            <Text className="text-blue-500 font-semibold ml-2">Add Budget Category</Text>
+            <Ionicons name="add-circle" size={24} color="#3b82f6" />
+            <Text className="text-blue-500 font-semibold text-lg ml-3">Add Budget Category</Text>
           </TouchableOpacity>
-        </View>
 
-        {/* Budget Categories */}
-        <View className="mx-4 mt-6">
-          <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Budget Categories
-          </Text>
-          
+          {/* Budget Categories */}
           <View>
-            {budgetCategories.map((budget, index) => {
-              const spent = categorySpending[budget.name] || 0;
-              const percentage = (spent / budget.limit) * 100;
-              const isOverBudget = spent > budget.limit;
-              const isEditing = editingCategory === budget.name;
+            <Text className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              Budget Categories
+            </Text>
 
-              return (
-                <Card
-                  key={budget.name}
-                  className={`${index > 0 ? 'mt-3' : ''}`}
-                >
-                  <View className="flex-row items-center justify-between mb-3">
-                    <View className="flex-row items-center flex-1">
-                      <View className={`w-12 h-12 rounded-full items-center justify-center mr-3 ${budget.color}`}>
-                        <Ionicons name={budget.icon as any} size={20} color="white" />
-                      </View>
-                      
-                      <View className="flex-1">
-                        <Text className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                          {budget.name}
-                        </Text>
-                        <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                          {formatCurrency(spent)} spent
-                        </Text>
-                      </View>
-                    </View>
+            <View className="space-y-4">
+              {budgetCategories.map((budget) => {
+                const spent = categorySpending[budget.name] || 0;
+                const percentage = (spent / budget.limit) * 100;
+                const isOverBudget = spent > budget.limit;
+                const isEditing = editingCategory === budget.name;
 
-                    <View className="items-end">
-                      {isEditing ? (
-                        <View className="flex-row items-center space-x-2">
-                          <TextInput
-                            value={editValue}
-                            onChangeText={setEditValue}
-                            keyboardType="numeric"
-                            className={`w-20 p-2 rounded border text-center ${
-                              isDark ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-900'
-                            }`}
-                            placeholder="0"
-                            placeholderTextColor={isDark ? '#6b7280' : '#9ca3af'}
-                          />
-                          <TouchableOpacity onPress={handleSaveBudget}>
-                            <Ionicons name="checkmark-circle" size={24} color="#10b981" />
-                          </TouchableOpacity>
-                          <TouchableOpacity onPress={handleCancelEdit}>
-                            <Ionicons name="close-circle" size={24} color="#ef4444" />
-                          </TouchableOpacity>
-                        </View>
-                      ) : (
-                        <View className="flex-row items-center space-x-2">
-                          <Text className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                            {formatCurrency(budget.limit)}
+                return (
+                  <Card key={budget.name}>
+                    {isEditing ? (
+                      <View className="space-y-4">
+                        <View className="flex-row items-center space-x-3">
+                          <View className={`w-12 h-12 rounded-full items-center justify-center ${budget.color}`}>
+                            <Ionicons name={budget.icon as any} size={24} color="white" />
+                          </View>
+                          <Text className={`text-lg font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                            {budget.name}
                           </Text>
-                          <TouchableOpacity onPress={() => handleEditBudget(budget.name, budget.limit)}>
-                            <Ionicons name="pencil" size={16} color={isDark ? '#6b7280' : '#9ca3af'} />
+                        </View>
+                        <TextInput
+                          value={editValue}
+                          onChangeText={setEditValue}
+                          keyboardType="numeric"
+                          className={`p-4 rounded-2xl border text-lg ${
+                            isDark ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-900'
+                          }`}
+                          placeholder="Enter new budget"
+                          placeholderTextColor={isDark ? '#6b7280' : '#9ca3af'}
+                        />
+                        <View className="flex-row space-x-3">
+                          <TouchableOpacity onPress={handleSaveBudget} className="flex-1 py-3 rounded-xl bg-green-500">
+                            <Text className="text-white text-center font-semibold">Save</Text>
                           </TouchableOpacity>
-                          <TouchableOpacity onPress={() => handleDeleteCategory(budget.name)}>
-                            <Ionicons name="trash" size={16} color="#ef4444" />
+                          <TouchableOpacity onPress={handleCancelEdit} className="flex-1 py-3 rounded-xl bg-gray-500">
+                            <Text className="text-white text-center font-semibold">Cancel</Text>
                           </TouchableOpacity>
                         </View>
-                      )}
-                    </View>
-                  </View>
-
-                  {/* Progress Bar */}
-                  <View className="mb-2">
-                    <View className={`h-2 rounded-full ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}>
-                      <View 
-                        className={`h-2 rounded-full ${
-                          isOverBudget ? 'bg-red-500' : percentage > 80 ? 'bg-yellow-500' : 'bg-green-500'
-                        }`}
-                        style={{ width: `${Math.min(percentage, 100)}%` }}
-                      />
-                    </View>
-                  </View>
-
-                  <View className="flex-row justify-between items-center">
-                    <Text className={`text-xs ${
-                      isOverBudget ? 'text-red-500' : 
-                      percentage > 80 ? 'text-yellow-500' : 'text-green-500'
-                    }`}>
-                      {percentage.toFixed(0)}% used
-                    </Text>
-                    <Text className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                      {formatCurrency(budget.limit - spent)} remaining
-                    </Text>
-                  </View>
-
-                  {isOverBudget && (
-                    <View className="mt-2 p-2 rounded bg-red-100 dark:bg-red-900/20">
-                      <Text className="text-red-500 text-xs font-medium text-center">
-                        Over budget by {formatCurrency(spent - budget.limit)}
-                      </Text>
-                    </View>
-                  )}
-                </Card>
-              );
-            })}
+                      </View>
+                    ) : (
+                      <View>
+                        <View className="flex-row items-center justify-between mb-3">
+                          <View className="flex-row items-center flex-1">
+                            <View className={`w-12 h-12 rounded-full items-center justify-center mr-4 ${budget.color}`}>
+                              <Ionicons name={budget.icon as any} size={24} color="white" />
+                            </View>
+                            <View className="flex-1">
+                              <Text className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                                {budget.name}
+                              </Text>
+                              <Text className={`text-base ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                                {formatCurrency(spent)} / {formatCurrency(budget.limit)}
+                              </Text>
+                            </View>
+                          </View>
+                          <View className="flex-row items-center space-x-3">
+                            <TouchableOpacity onPress={() => handleEditBudget(budget.name, budget.limit)}>
+                              <Ionicons name="pencil-outline" size={22} color={isDark ? '#9ca3af' : '#6b7280'} />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => handleDeleteCategory(budget.name)}>
+                              <Ionicons name="trash-outline" size={22} color="#ef4444" />
+                            </TouchableOpacity>
+                          </View>
+                        </View>
+                        <View className="space-y-2">
+                          <View className={`h-3 rounded-full ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}>
+                            <View
+                              className={`h-3 rounded-full ${
+                                isOverBudget ? 'bg-red-500' : percentage > 80 ? 'bg-yellow-500' : 'bg-green-500'
+                              }`}
+                              style={{ width: `${Math.min(percentage, 100)}%` }}
+                            />
+                          </View>
+                          <View className="flex-row justify-between items-center">
+                            <Text className={`text-sm font-medium ${
+                              isOverBudget ? 'text-red-500' :
+                              percentage > 80 ? 'text-yellow-500' : 'text-green-500'
+                            }`}>
+                              {percentage.toFixed(0)}% used
+                            </Text>
+                            <Text className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                              {formatCurrency(budget.limit - spent)} remaining
+                            </Text>
+                          </View>
+                        </View>
+                        {isOverBudget && (
+                          <View className={`mt-3 p-3 rounded-xl ${isDark ? 'bg-red-900' : 'bg-red-100'}`}>
+                            <Text className="text-red-500 text-sm font-semibold text-center">
+                              Over budget by {formatCurrency(spent - budget.limit)}
+                            </Text>
+                          </View>
+                        )}
+                      </View>
+                    )}
+                  </Card>
+                );
+              })}
+            </View>
           </View>
         </View>
 

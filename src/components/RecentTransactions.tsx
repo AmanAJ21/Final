@@ -57,7 +57,9 @@ export function RecentTransactions() {
             <View className="flex-row items-center justify-between">
               <View className="flex-row items-center flex-1">
                 <View className={`w-12 h-12 rounded-full items-center justify-center mr-4 ${
-                  transaction.type === 'income' ? 'bg-green-100' : 'bg-red-100'
+                  transaction.type === 'income'
+                    ? (isDark ? 'bg-green-900' : 'bg-green-100')
+                    : (isDark ? 'bg-red-900' : 'bg-red-100')
                 }`}>
                   <Ionicons
                     name={getCategoryIcon(transaction.category) as any}

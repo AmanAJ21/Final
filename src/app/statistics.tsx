@@ -125,255 +125,264 @@ export default function StatisticsPage() {
         className="flex-1"
         contentContainerStyle={{ paddingBottom: 20 }}
       >
-        {/* Period Selector */}
-        <View className="mx-4 mt-6 mb-6">
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <View className="flex-row space-x-2">
-              {periods.map((period) => (
-                <TouchableOpacity
-                  key={period.key}
-                  onPress={() => setSelectedPeriod(period.key as any)}
-                  className={`px-4 py-2 rounded-full ${selectedPeriod === period.key
-                    ? 'bg-blue-500'
-                    : isDark ? 'bg-gray-800' : 'bg-white'
-                    } shadow-sm`}
-                >
-                  <Text className={`font-medium ${selectedPeriod === period.key
-                    ? 'text-white'
-                    : isDark ? 'text-gray-300' : 'text-gray-700'
-                    }`}>
-                    {period.label}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </ScrollView>
-        </View>
+        <View className="p-5 space-y-6">
+          {/* Period Selector */}
+          <View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              <View className="flex-row gap-3">
+                {periods.map((period) => (
+                  <TouchableOpacity
+                    key={period.key}
+                    onPress={() => setSelectedPeriod(period.key as any)}
+                    className={`px-5 py-3 rounded-full ${selectedPeriod === period.key
+                      ? 'bg-blue-500'
+                      : 'bg-white dark:bg-neutral-800'
+                      } shadow-md`}
+                  >
+                    <Text className={`font-semibold text-base ${selectedPeriod === period.key
+                      ? 'text-white'
+                      : isDark ? 'text-gray-300' : 'text-gray-700'
+                      }`}>
+                      {period.label}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </ScrollView>
+          </View>
 
-        {/* Summary Cards */}
-        <View className="mx-4 mb-6">
+          {/* Summary Cards */}
           <View className="flex-row flex-wrap -mx-2">
             <View className="w-1/2 px-2 mb-4">
-              <Card className="p-4 items-center">
-                <View className="w-12 h-12 rounded-full items-center justify-center mb-3 bg-green-100">
-                  <Ionicons name="trending-up" size={24} color="#10b981" />
+              <Card className="p-4 items-center space-y-2">
+                <View className={`w-14 h-14 rounded-full items-center justify-center ${isDark ? 'bg-green-900' : 'bg-green-100'}`}>
+                  <Ionicons name="trending-up" size={28} color="#10b981" />
                 </View>
-                <Text className="text-lg font-bold text-green-500">
-                  {formatCurrency(periodIncome)}
-                </Text>
-                <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  Income
-                </Text>
+                <View className="items-center">
+                  <Text className="text-xl font-bold text-green-500">
+                    {formatCurrency(periodIncome)}
+                  </Text>
+                  <Text className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                    Income
+                  </Text>
+                </View>
               </Card>
             </View>
 
             <View className="w-1/2 px-2 mb-4">
-              <Card className="p-4 items-center">
-                <View className="w-12 h-12 rounded-full items-center justify-center mb-3 bg-red-100">
-                  <Ionicons name="trending-down" size={24} color="#ef4444" />
+              <Card className="p-4 items-center space-y-2">
+                <View className={`w-14 h-14 rounded-full items-center justify-center ${isDark ? 'bg-red-900' : 'bg-red-100'}`}>
+                  <Ionicons name="trending-down" size={28} color="#ef4444" />
                 </View>
-                <Text className="text-lg font-bold text-red-500">
-                  {formatCurrency(periodExpenses)}
-                </Text>
-                <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  Expenses
-                </Text>
+                <View className="items-center">
+                  <Text className="text-xl font-bold text-red-500">
+                    {formatCurrency(periodExpenses)}
+                  </Text>
+                  <Text className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                    Expenses
+                  </Text>
+                </View>
               </Card>
             </View>
 
             <View className="w-1/2 px-2 mb-4">
-              <Card className="p-4 items-center">
-                <View className={`w-12 h-12 rounded-full items-center justify-center mb-3 ${periodNet >= 0 ? 'bg-green-100' : 'bg-red-100'}`}>
-                  <Ionicons name={periodNet >= 0 ? 'checkmark-circle' : 'close-circle'} size={24} color={periodNet >= 0 ? '#10b981' : '#ef4444'} />
+              <Card className="p-4 items-center space-y-2">
+                <View className={`w-14 h-14 rounded-full items-center justify-center ${periodNet >= 0 ? (isDark ? 'bg-green-900' : 'bg-green-100') : (isDark ? 'bg-red-900' : 'bg-red-100')}`}>
+                  <Ionicons name={periodNet >= 0 ? 'checkmark-circle' : 'close-circle'} size={28} color={periodNet >= 0 ? '#10b981' : '#ef4444'} />
                 </View>
-                <Text className={`text-lg font-bold ${periodNet >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                  {formatCurrency(periodNet)}
-                </Text>
-                <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  Net Income
-                </Text>
+                <View className="items-center">
+                  <Text className={`text-xl font-bold ${periodNet >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                    {formatCurrency(periodNet)}
+                  </Text>
+                  <Text className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                    Net Income
+                  </Text>
+                </View>
               </Card>
             </View>
 
             <View className="w-1/2 px-2 mb-4">
-              <Card className="p-4 items-center">
-                <View className="w-12 h-12 rounded-full items-center justify-center mb-3 bg-blue-100">
-                  <Ionicons name="receipt" size={24} color="#3b82f6" />
+              <Card className="p-4 items-center space-y-2">
+                <View className={`w-14 h-14 rounded-full items-center justify-center ${isDark ? 'bg-blue-900' : 'bg-blue-100'}`}>
+                  <Ionicons name="receipt" size={28} color="#3b82f6" />
                 </View>
-                <Text className="text-lg font-bold text-blue-500">
-                  {periodTransactions.length}
-                </Text>
-                <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  Transactions
-                </Text>
+                <View className="items-center">
+                  <Text className="text-xl font-bold text-blue-500">
+                    {periodTransactions.length}
+                  </Text>
+                  <Text className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                    Transactions
+                  </Text>
+                </View>
               </Card>
             </View>
           </View>
-        </View>
 
-        {/* Daily Spending Pattern */}
-        <Card className="mx-4 mb-6 p-4">
-          <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Daily Spending (Last 7 Days)
-          </Text>
+          {/* Daily Spending Pattern */}
+          <Card>
+            <Text className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              Daily Spending (Last 7 Days)
+            </Text>
 
-          <View className="flex-row items-end justify-between h-24 mb-2">
-            {dailySpending.map((day, index) => {
-              const height = maxDailySpending > 0 ? (day.amount / maxDailySpending) * 80 : 0;
-              const isToday = day.date === new Date().toISOString().split('T')[0];
+            <View className="flex-row items-end justify-between h-32 mb-2">
+              {dailySpending.map((day, index) => {
+                const height = maxDailySpending > 0 ? (day.amount / maxDailySpending) * 110 : 0;
+                const isToday = day.date === new Date().toISOString().split('T')[0];
 
-              return (
-                <View key={index} className="flex-1 items-center">
-                  <View
-                    className={`w-6 rounded-t-lg ${isToday
-                      ? 'bg-blue-500'
-                      : day.amount > 0
-                        ? 'bg-red-400'
-                        : 'bg-gray-300'
-                      }`}
-                    style={{ height: Math.max(height, 2) }}
-                  />
-                </View>
-              );
-            })}
-          </View>
-
-          <View className="flex-row justify-between">
-            {dailySpending.map((day, index) => (
-              <Text
-                key={index}
-                className={`text-xs flex-1 text-center ${day.date === new Date().toISOString().split('T')[0]
-                  ? 'text-blue-500 font-medium'
-                  : isDark ? 'text-gray-400' : 'text-gray-500'
-                  }`}
-              >
-                {day.day}
-              </Text>
-            ))}
-          </View>
-        </Card>
-        {/* Monthly Trend */}
-        <Card className="mx-4 mb-6 p-4">
-          <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            6-Month Trend
-          </Text>
-          <View>
-            {monthlyData.map((data, index) => (
-              <View key={index} className={`flex-row items-center justify-between ${index > 0 ? 'mt-3' : ''}`}>
-                <Text className={`font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                  {data.month}
-                </Text>
-                <View className="flex-row space-x-4">
-                  <Text className="text-green-500 text-sm">
-                    +{formatCurrency(data.income)}
-                  </Text>
-                  <Text className="text-red-500 text-sm">
-                    -{formatCurrency(data.expenses)}
-                  </Text>
-                  <Text className={`font-semibold ${data.net >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                    {formatCurrency(data.net)}
-                  </Text>
-                </View>
-              </View>
-            ))}
-          </View>
-        </Card>
-
-        {/* Category Breakdown */}
-        <Card className="mx-4 mb-6 p-4">
-          <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Top Spending Categories
-          </Text>
-          <View>
-            {sortedCategories.length > 0 ? sortedCategories.map(([category, amount], index) => {
-              const percentage = periodExpenses > 0 ? (amount / periodExpenses) * 100 : 0;
-              return (
-                <View key={category} className={`${index > 0 ? 'mt-3' : ''}`}>
-                  <View className="flex-row justify-between items-center mb-1">
-                    <Text className={`font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                      {category}
-                    </Text>
-                    <Text className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                      {formatCurrency(amount)}
-                    </Text>
-                  </View>
-                  <View className={`h-2 rounded-full ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}>
+                return (
+                  <View key={index} className="flex-1 items-center">
                     <View
-                      className="h-2 rounded-full bg-purple-500"
-                      style={{ width: `${percentage}%` }}
+                      className={`w-8 rounded-lg ${isToday
+                        ? 'bg-blue-500'
+                        : day.amount > 0
+                          ? 'bg-red-400'
+                          : 'bg-gray-300 dark:bg-gray-700'
+                        }`}
+                      style={{ height: Math.max(height, 4) }}
                     />
                   </View>
-                  <Text className={`text-xs mt-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                    {percentage.toFixed(1)}% of period expenses
+                );
+              })}
+            </View>
+
+            <View className="flex-row justify-between border-t border-gray-200 dark:border-gray-700 pt-2">
+              {dailySpending.map((day, index) => (
+                <Text
+                  key={index}
+                  className={`text-sm font-medium flex-1 text-center ${day.date === new Date().toISOString().split('T')[0]
+                    ? 'text-blue-500 font-bold'
+                    : isDark ? 'text-gray-400' : 'text-gray-500'
+                    }`}
+                >
+                  {day.day}
+                </Text>
+              ))}
+            </View>
+          </Card>
+
+          {/* Monthly Trend */}
+          <Card>
+            <Text className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              6-Month Trend
+            </Text>
+            <View className="space-y-4">
+              {monthlyData.map((data, index) => (
+                <View key={index} className={`flex-row items-center justify-between`}>
+                  <Text className={`font-semibold text-base ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                    {data.month}
+                  </Text>
+                  <View className="flex-row space-x-4 items-baseline">
+                    <Text className="text-green-500 text-base">
+                      +{formatCurrency(data.income)}
+                    </Text>
+                    <Text className="text-red-500 text-base">
+                      -{formatCurrency(data.expenses)}
+                    </Text>
+                    <Text className={`font-bold text-lg ${data.net >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                      {formatCurrency(data.net)}
+                    </Text>
+                  </View>
+                </View>
+              ))}
+            </View>
+          </Card>
+
+          {/* Category Breakdown */}
+          <Card>
+            <Text className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              Top Spending Categories
+            </Text>
+            <View className="space-y-4">
+              {sortedCategories.length > 0 ? sortedCategories.map(([category, amount]) => {
+                const percentage = periodExpenses > 0 ? (amount / periodExpenses) * 100 : 0;
+                return (
+                  <View key={category}>
+                    <View className="flex-row justify-between items-center mb-1">
+                      <Text className={`font-semibold text-base ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                        {category}
+                      </Text>
+                      <Text className={`font-bold text-base ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                        {formatCurrency(amount)}
+                      </Text>
+                    </View>
+                    <View className={`h-3 rounded-full ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}>
+                      <View
+                        className="h-3 rounded-full bg-purple-500"
+                        style={{ width: `${percentage}%` }}
+                      />
+                    </View>
+                    <Text className={`text-sm mt-1 font-medium ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                      {percentage.toFixed(1)}% of period expenses
+                    </Text>
+                  </View>
+                );
+              }) : (
+                <View className="items-center py-8 space-y-3">
+                  <Ionicons name="pie-chart-outline" size={56} color={isDark ? '#6b7280' : '#9ca3af'} />
+                  <Text className={`text-lg font-semibold text-center ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                    No expense data for this period
+                  </Text>
+                  <Text className={`text-base text-center ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+                    Add some expense transactions to see category breakdown
                   </Text>
                 </View>
-              );
-            }) : (
-              <View className="items-center py-8">
-                <Ionicons name="pie-chart-outline" size={48} color={isDark ? '#6b7280' : '#9ca3af'} />
-                <Text className={`mt-2 text-center ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                  No expense data for this period
+              )}
+            </View>
+          </Card>
+
+          {/* Quick Stats */}
+          <View className="space-y-4">
+            <Card className="p-4 flex-row items-center space-x-4">
+              <View className={`w-14 h-14 rounded-full items-center justify-center ${isDark ? 'bg-blue-900' : 'bg-blue-100'}`}>
+                <Ionicons name="receipt-outline" size={28} color="#3b82f6" />
+              </View>
+              <View className="flex-1">
+                <Text className={`text-base ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                  Total Transactions
                 </Text>
-                <Text className={`text-sm text-center ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-                  Add some expense transactions to see category breakdown
+                <Text className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  {transactions.length}
                 </Text>
               </View>
-            )}
+            </Card>
+
+            <Card className="p-4 flex-row items-center space-x-4">
+              <View className={`w-14 h-14 rounded-full items-center justify-center ${isDark ? 'bg-green-900' : 'bg-green-100'}`}>
+                <Ionicons name="trending-up-outline" size={28} color="#10b981" />
+              </View>
+              <View className="flex-1">
+                <Text className={`text-base ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                  Average Transaction
+                </Text>
+                <Text className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  {transactions.length > 0
+                    ? formatCurrency(transactions.reduce((sum, t) => sum + t.amount, 0) / transactions.length)
+                    : formatCurrency(0)
+                  }
+                </Text>
+              </View>
+            </Card>
+
+            <Card className="p-4 flex-row items-center space-x-4">
+              <View className={`w-14 h-14 rounded-full items-center justify-center ${isDark ? 'bg-purple-900' : 'bg-purple-100'}`}>
+                <Ionicons name="calendar-outline" size={28} color="#8b5cf6" />
+              </View>
+              <View className="flex-1">
+                <Text className={`text-base ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                  This Month Transactions
+                </Text>
+                <Text className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  {selectedPeriod === 'month' ? periodTransactions.length :
+                   transactions.filter(t => {
+                     const transactionDate = new Date(t.date);
+                     const now = new Date();
+                     return transactionDate.getMonth() === now.getMonth() &&
+                            transactionDate.getFullYear() === now.getFullYear();
+                   }).length}
+                </Text>
+              </View>
+            </Card>
           </View>
-        </Card>
-
-        {/* Quick Stats */}
-        <View className="mx-4 mt-6">
-          <Card className="p-4 flex-row items-center">
-            <View className={`w-12 h-12 rounded-full items-center justify-center mr-3 ${isDark ? 'bg-blue-900' : 'bg-blue-100'}`}>
-              <Ionicons name="receipt" size={20} color="#3b82f6" />
-            </View>
-            <View className="flex-1">
-              <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                Total Transactions
-              </Text>
-              <Text className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                {transactions.length}
-              </Text>
-            </View>
-          </Card>
-
-          <Card className="mt-3 p-4 flex-row items-center">
-            <View className={`w-12 h-12 rounded-full items-center justify-center mr-3 ${isDark ? 'bg-green-900' : 'bg-green-100'}`}>
-              <Ionicons name="trending-up" size={20} color="#10b981" />
-            </View>
-            <View className="flex-1">
-              <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                Average Transaction
-              </Text>
-              <Text className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                {transactions.length > 0
-                  ? formatCurrency(transactions.reduce((sum, t) => sum + t.amount, 0) / transactions.length)
-                  : formatCurrency(0)
-                }
-              </Text>
-            </View>
-          </Card>
-
-          <Card className="mt-3 p-4 flex-row items-center">
-            <View className={`w-12 h-12 rounded-full items-center justify-center mr-3 ${isDark ? 'bg-purple-900' : 'bg-purple-100'}`}>
-              <Ionicons name="calendar" size={20} color="#8b5cf6" />
-            </View>
-            <View className="flex-1">
-              <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                This Month Transactions
-              </Text>
-              <Text className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                {selectedPeriod === 'month' ? periodTransactions.length : 
-                 transactions.filter(t => {
-                   const transactionDate = new Date(t.date);
-                   const now = new Date();
-                   return transactionDate.getMonth() === now.getMonth() && 
-                          transactionDate.getFullYear() === now.getFullYear();
-                 }).length}
-              </Text>
-            </View>
-          </Card>
         </View>
 
         <View className="h-20" />

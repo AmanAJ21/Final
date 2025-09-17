@@ -171,10 +171,12 @@ export default function ExportImportPage() {
       <Header title="Export & Import" showBackButton />
       
       <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 20 }}>
-        <StatisticsCard stats={stats} formatCurrency={formatCurrency} />
-        <ActionCard title="Export Data" options={exportOptions} />
-        <ActionCard title="Import Data" options={importOptions} />
-        <BackupInfoCard />
+        <View className="p-5 space-y-6">
+          <StatisticsCard stats={stats} formatCurrency={formatCurrency} />
+          <ActionCard title="Export Data" options={exportOptions} />
+          <ActionCard title="Import Data" options={importOptions} />
+          <BackupInfoCard />
+        </View>
         <View className="h-20" />
       </ScrollView>
 

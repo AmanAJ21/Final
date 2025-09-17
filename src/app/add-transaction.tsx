@@ -77,7 +77,7 @@ export default function AddTransactionPage() {
                 className={`flex-1 py-3 rounded-xl ${
                   transactionType === 'expense'
                     ? 'bg-red-500'
-                    : isDark ? 'bg-transparent' : 'bg-transparent'
+                    : ''
                 }`}
               >
                 <Text className={`text-center font-semibold ${
@@ -93,7 +93,7 @@ export default function AddTransactionPage() {
                 className={`flex-1 py-3 rounded-xl ${
                   transactionType === 'income'
                     ? 'bg-green-500'
-                    : isDark ? 'bg-transparent' : 'bg-transparent'
+                    : ''
                 }`}
               >
                 <Text className={`text-center font-semibold ${
@@ -152,9 +152,7 @@ export default function AddTransactionPage() {
                         ? transactionType === 'income'
                           ? 'bg-green-500 border-green-500'
                           : 'bg-red-500 border-red-500'
-                        : isDark
-                          ? 'bg-gray-800 border-gray-700'
-                          : 'bg-white border-gray-200'
+                      : 'bg-transparent border-gray-700'
                     }`}
                   >
                     <Text className={`font-semibold ${

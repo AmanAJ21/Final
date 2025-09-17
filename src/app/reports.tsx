@@ -146,172 +146,174 @@ export default function ReportsPage() {
       <Header title="Financial Reports" showBackButton />
       
       <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 20 }}>
-        {/* Period Selector */}
-        <View className="mx-4 mt-6 mb-6">
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <View className="flex-row space-x-2">
-              {periods.map((period) => (
-                <TouchableOpacity
-                  key={period.key}
-                  onPress={() => setSelectedPeriod(period.key as any)}
-                  className={`px-4 py-2 rounded-full ${
-                    selectedPeriod === period.key
-                      ? 'bg-blue-500'
-                      : isDark ? 'bg-gray-800' : 'bg-white'
-                  } shadow-sm`}
-                >
-                  <Text className={`font-medium ${
-                    selectedPeriod === period.key
-                      ? 'text-white'
-                      : isDark ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    {period.label}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </ScrollView>
-        </View>
+        <View className="p-5 space-y-6">
+          {/* Period Selector */}
+          <View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              <View className="flex-row gap-3">
+                {periods.map((period) => (
+                  <TouchableOpacity
+                    key={period.key}
+                    onPress={() => setSelectedPeriod(period.key as any)}
+                    className={`px-5 py-3 rounded-full ${
+                      selectedPeriod === period.key
+                        ? 'bg-blue-500'
+                        : 'bg-white dark:bg-neutral-800'
+                    } shadow-md`}
+                  >
+                    <Text className={`font-semibold text-base ${
+                      selectedPeriod === period.key
+                        ? 'text-white'
+                        : isDark ? 'text-gray-300' : 'text-gray-700'
+                    }`}>
+                      {period.label}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </ScrollView>
+          </View>
 
-        {/* Summary Cards */}
-        <View className="mx-4 mb-6">
+          {/* Summary Cards */}
           <View className="flex-row flex-wrap -mx-2">
             {reportCards.map((card, index) => (
               <View key={index} className="w-1/2 px-2 mb-4">
-                <Card className="p-4 items-center">
-                  <View className={`w-12 h-12 rounded-full items-center justify-center mb-3 ${card.bgColor}`}>
-                    <Ionicons name={card.icon as any} size={24} color={card.color.includes('green') ? '#10b981' : card.color.includes('red') ? '#ef4444' : '#3b82f6'} />
+                <Card className="p-4 items-center space-y-2">
+                  <View className={`w-14 h-14 rounded-full items-center justify-center ${isDark ? card.bgColor.replace('100', '900') : card.bgColor}`}>
+                    <Ionicons name={card.icon as any} size={28} color={card.color.includes('green') ? '#10b981' : card.color.includes('red') ? '#ef4444' : '#3b82f6'} />
                   </View>
-                  <Text className={`text-lg font-bold ${card.color}`}>
-                    {card.value}
-                  </Text>
-                  <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                    {card.title}
-                  </Text>
+                  <View className="items-center">
+                    <Text className={`text-xl font-bold ${card.color}`}>
+                      {card.value}
+                    </Text>
+                    <Text className={`text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                      {card.title}
+                    </Text>
+                  </View>
                 </Card>
               </View>
             ))}
           </View>
-        </View>
 
-        {/* Financial Health */}
-        <Card className="mx-4 mb-6 p-4">
-          <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Financial Health
-          </Text>
-          
-          <View className="space-y-4">
-            <View>
-              <View className="flex-row justify-between items-center mb-2">
-                <Text className={`${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Savings Rate</Text>
-                <Text className={`font-semibold ${savingsRate >= 20 ? 'text-green-500' : savingsRate >= 10 ? 'text-yellow-500' : 'text-red-500'}`}>
-                  {savingsRate.toFixed(1)}%
-                </Text>
-              </View>
-              <View className={`h-2 rounded-full ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}>
-                <View 
-                  className={`h-2 rounded-full ${savingsRate >= 20 ? 'bg-green-500' : savingsRate >= 10 ? 'bg-yellow-500' : 'bg-red-500'}`}
-                  style={{ width: `${Math.min(Math.abs(savingsRate), 100)}%` }}
-                />
-              </View>
-            </View>
+          {/* Financial Health */}
+          <Card>
+            <Text className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              Financial Health
+            </Text>
 
-            <View>
-              <View className="flex-row justify-between items-center mb-2">
-                <Text className={`${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Expense Ratio</Text>
-                <Text className={`font-semibold ${expenseRatio <= 80 ? 'text-green-500' : expenseRatio <= 90 ? 'text-yellow-500' : 'text-red-500'}`}>
-                  {expenseRatio.toFixed(1)}%
-                </Text>
-              </View>
-              <View className={`h-2 rounded-full ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}>
-                <View 
-                  className={`h-2 rounded-full ${expenseRatio <= 80 ? 'bg-green-500' : expenseRatio <= 90 ? 'bg-yellow-500' : 'bg-red-500'}`}
-                  style={{ width: `${Math.min(expenseRatio, 100)}%` }}
-                />
-              </View>
-            </View>
-          </View>
-        </Card>
-
-        {/* Monthly Trend */}
-        <Card className="mx-4 mb-6 p-4">
-          <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            6-Month Trend
-          </Text>
-          
-          <View className="flex-row items-end justify-between h-32 mb-4">
-            {monthlyData.map((month, index) => (
-              <View key={index} className="flex-1 items-center">
-                <View className="flex-1 justify-end items-center space-y-1">
-                  <View 
-                    className="w-4 rounded-t-sm bg-green-500"
-                    style={{ height: Math.max((month.income / maxAmount) * 100, 2) }}
-                  />
-                  <View 
-                    className="w-4 rounded-t-sm bg-red-500"
-                    style={{ height: Math.max((month.expenses / maxAmount) * 100, 2) }}
-                  />
-                </View>
-              </View>
-            ))}
-          </View>
-          
-          <View className="flex-row justify-between">
-            {monthlyData.map((month, index) => (
-              <Text 
-                key={index} 
-                className={`text-xs flex-1 text-center ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
-              >
-                {month.month}
-              </Text>
-            ))}
-          </View>
-
-          <View className="flex-row items-center justify-center mt-4 space-x-4">
-            <View className="flex-row items-center">
-              <View className="w-3 h-3 rounded bg-green-500 mr-2" />
-              <Text className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Income</Text>
-            </View>
-            <View className="flex-row items-center">
-              <View className="w-3 h-3 rounded bg-red-500 mr-2" />
-              <Text className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Expenses</Text>
-            </View>
-          </View>
-        </Card>
-
-        {/* Top Categories */}
-        <Card className="mx-4 mb-6 p-4">
-          <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Top Spending Categories
-          </Text>
-          
-          <View>
-            {sortedCategories.map(([category, amount], index) => {
-              const percentage = expenses > 0 ? (amount / expenses) * 100 : 0;
-              return (
-                <View key={category} className={`${index > 0 ? 'mt-3' : ''}`}>
-                  <View className="flex-row justify-between items-center mb-1">
-                    <Text className={`font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                      {category}
-                    </Text>
-                    <Text className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                      {formatCurrency(amount)}
-                    </Text>
-                  </View>
-                  <View className={`h-2 rounded-full ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}>
-                    <View 
-                      className="h-2 rounded-full bg-blue-500"
-                      style={{ width: `${percentage}%` }}
-                    />
-                  </View>
-                  <Text className={`text-xs mt-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                    {percentage.toFixed(1)}% of total expenses
+            <View className="space-y-5">
+              <View>
+                <View className="flex-row justify-between items-center mb-2">
+                  <Text className={`text-base ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Savings Rate</Text>
+                  <Text className={`font-semibold text-lg ${savingsRate >= 20 ? 'text-green-500' : savingsRate >= 10 ? 'text-yellow-500' : 'text-red-500'}`}>
+                    {savingsRate.toFixed(1)}%
                   </Text>
                 </View>
-              );
-            })}
-          </View>
-        </Card>
+                <View className={`h-3 rounded-full ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}>
+                  <View 
+                    className={`h-3 rounded-full ${savingsRate >= 20 ? 'bg-green-500' : savingsRate >= 10 ? 'bg-yellow-500' : 'bg-red-500'}`}
+                    style={{ width: `${Math.min(Math.abs(savingsRate), 100)}%` }}
+                  />
+                </View>
+              </View>
+
+              <View>
+                <View className="flex-row justify-between items-center mb-2">
+                  <Text className={`text-base ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Expense Ratio</Text>
+                  <Text className={`font-semibold text-lg ${expenseRatio <= 80 ? 'text-green-500' : expenseRatio <= 90 ? 'text-yellow-500' : 'text-red-500'}`}>
+                    {expenseRatio.toFixed(1)}%
+                  </Text>
+                </View>
+                <View className={`h-3 rounded-full ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}>
+                  <View 
+                    className={`h-3 rounded-full ${expenseRatio <= 80 ? 'bg-green-500' : expenseRatio <= 90 ? 'bg-yellow-500' : 'bg-red-500'}`}
+                    style={{ width: `${Math.min(expenseRatio, 100)}%` }}
+                  />
+                </View>
+              </View>
+            </View>
+          </Card>
+
+          {/* Monthly Trend */}
+          <Card>
+            <Text className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              6-Month Trend
+            </Text>
+
+            <View className="flex-row items-end justify-between h-40 mb-4 px-2">
+              {monthlyData.map((month, index) => (
+                <View key={index} className="flex-1 items-center">
+                  <View className="flex-row items-end h-full">
+                    <View 
+                      className="w-4 rounded-t-md bg-green-500 mx-1"
+                      style={{ height: Math.max((month.income / maxAmount) * 150, 4) }}
+                    />
+                    <View
+                      className="w-4 rounded-t-md bg-red-500 mx-1"
+                      style={{ height: Math.max((month.expenses / maxAmount) * 150, 4) }}
+                    />
+                  </View>
+                </View>
+              ))}
+            </View>
+
+            <View className="flex-row justify-between border-t border-gray-200 dark:border-gray-700 pt-2">
+              {monthlyData.map((month, index) => (
+                <Text
+                  key={index}
+                  className={`text-sm font-medium flex-1 text-center ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
+                >
+                  {month.month}
+                </Text>
+              ))}
+            </View>
+
+            <View className="flex-row items-center justify-center mt-4 space-x-6">
+              <View className="flex-row items-center">
+                <View className="w-4 h-4 rounded bg-green-500 mr-2" />
+                <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Income</Text>
+              </View>
+              <View className="flex-row items-center">
+                <View className="w-4 h-4 rounded bg-red-500 mr-2" />
+                <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Expenses</Text>
+              </View>
+            </View>
+          </Card>
+
+          {/* Top Categories */}
+          <Card>
+            <Text className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              Top Spending Categories
+            </Text>
+
+            <View className="space-y-4">
+              {sortedCategories.map(([category, amount]) => {
+                const percentage = expenses > 0 ? (amount / expenses) * 100 : 0;
+                return (
+                  <View key={category}>
+                    <View className="flex-row justify-between items-center mb-1">
+                      <Text className={`font-semibold text-base ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                        {category}
+                      </Text>
+                      <Text className={`font-bold text-base ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                        {formatCurrency(amount)}
+                      </Text>
+                    </View>
+                    <View className={`h-3 rounded-full ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}>
+                      <View
+                        className="h-3 rounded-full bg-blue-500"
+                        style={{ width: `${percentage}%` }}
+                      />
+                    </View>
+                    <Text className={`text-sm mt-1 font-medium ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                      {percentage.toFixed(1)}% of total expenses
+                    </Text>
+                  </View>
+                );
+              })}
+            </View>
+          </Card>
+        </View>
 
         <View className="h-20" />
       </ScrollView>

@@ -20,41 +20,39 @@ export function ActionCard({ options, title }: ActionCardProps) {
   const { isDark } = useTheme();
 
   return (
-    <View className="mx-4 mt-6">
-      <Text className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+    <View>
+      <Text className={`text-xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
         {title}
       </Text>
 
-      <View>
+      <Card className="p-0 overflow-hidden">
         {options.map((option, index) => (
-          <Card
+          <TouchableOpacity
             key={option.id}
-            className={`${index > 0 ? 'mt-3' : ''}`}
             onPress={option.onPress}
+            className={`flex-row items-center p-5 ${index < options.length - 1 ? 'border-b border-gray-200 dark:border-gray-700' : ''}`}
           >
-            <View className="flex-row items-center">
-              <View className={`w-12 h-12 rounded-full items-center justify-center mr-4 ${option.color}`}>
-                <Ionicons name={option.icon} size={24} color="white" />
-              </View>
-
-              <View className="flex-1">
-                <Text className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  {option.title}
-                </Text>
-                <Text className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  {option.subtitle}
-                </Text>
-              </View>
-
-              <Ionicons
-                name="chevron-forward"
-                size={20}
-                color={isDark ? '#6b7280' : '#9ca3af'}
-              />
+            <View className={`w-14 h-14 rounded-full items-center justify-center mr-4 ${option.color}`}>
+              <Ionicons name={option.icon} size={28} color="white" />
             </View>
-          </Card>
+
+            <View className="flex-1">
+              <Text className={`font-semibold text-lg ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                {option.title}
+              </Text>
+              <Text className={`text-base ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                {option.subtitle}
+              </Text>
+            </View>
+
+            <Ionicons
+              name="chevron-forward"
+              size={24}
+              color={isDark ? '#6b7280' : '#9ca3af'}
+            />
+          </TouchableOpacity>
         ))}
-      </View>
+      </Card>
     </View>
   );
 }
