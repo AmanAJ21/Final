@@ -26,13 +26,7 @@ export default function SettingsPage() {
     );
   };
 
-  const handleBackupData = () => {
-    Alert.alert(
-      'Backup Data',
-      'Cloud backup functionality will be available in a future update.',
-      [{ text: 'OK' }]
-    );
-  };
+  
 
   const handleClearData = () => {
     Alert.alert(
@@ -104,12 +98,6 @@ export default function SettingsPage() {
           onPress: () => router.push('/recurring')
         },
         {
-          icon: 'cloud-upload',
-          title: 'Backup Data',
-          subtitle: 'Backup to cloud storage',
-          onPress: handleBackupData
-        },
-        {
           icon: 'trash',
           title: 'Clear All Data',
           subtitle: 'Delete all transactions permanently',
@@ -138,12 +126,6 @@ export default function SettingsPage() {
           title: 'Financial Reports',
           subtitle: 'Comprehensive financial reports',
           onPress: () => router.push('/reports')
-        },
-        {
-          icon: 'calendar',
-          title: 'Account Age',
-          subtitle: 'Using Transaction Tracker since today',
-          onPress: () => { }
         }
       ]
     },
@@ -155,30 +137,6 @@ export default function SettingsPage() {
           title: 'App Version',
           subtitle: '1.0.0',
           onPress: () => { }
-        },
-        {
-          icon: 'help-circle',
-          title: 'Help & Support',
-          subtitle: 'Get help with using the app',
-          onPress: () => {
-            Alert.alert(
-              'Help & Support',
-              'For support, please contact us at support@transactiontracker.com',
-              [{ text: 'OK' }]
-            );
-          }
-        },
-        {
-          icon: 'heart',
-          title: 'Rate the App',
-          subtitle: 'Help us improve by rating the app',
-          onPress: () => {
-            Alert.alert(
-              'Rate the App',
-              'Thank you for using Transaction Tracker! Rating functionality will be available when published to app stores.',
-              [{ text: 'OK' }]
-            );
-          }
         }
       ]
     }

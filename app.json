@@ -32,7 +32,7 @@
     },
     "package": "com.anonymous.myapp"
   },
-  "name": "my-app",
+  "name": "v1",
   "slug": "my-app",
   "icon": "./src/assets/icon.png",
   "splash": {
